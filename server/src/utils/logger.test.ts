@@ -23,10 +23,17 @@ jest.mock('winston', () => {
   };
 });
 
-import { timestampOptions, colorizeOptions, format, colors, levels, getLevelByEnv } from 'src/config/logger';
+import {
+  timestampOptions,
+  colorizeOptions,
+  colors,
+  levels,
+  getLevelByEnv,
+} from 'src/config/logger';
+
 describe('logger', () => {
   it('should be configured', async () => {
-    await import('../utils/logger');
+    const { format } = await import('../utils/logger');
 
     const { timestamp, colorize, printf, combine } = mockFormat;
 
@@ -35,8 +42,14 @@ describe('logger', () => {
 
     expect(mockAddColor).toHaveBeenLastCalledWith(colors);
 
-    expect(combine).toHaveBeenLastCalledWith(timestamp(timestampOptions), colorize(colorizeOptions), printf(format));
+    expect(combine).toHaveBeenLastCalledWith(
+      timestamp(timestampOptions),
+      colorize(colorizeOptions),
+      printf(format),
+    );
 
-    expect(mockCreateLogger).toHaveBeenCalledWith(expect.objectContaining({ levels, level: getLevelByEnv() }));
+    expect(mockCreateLogger).toHaveBeenCalledWith(
+      expect.objectContaining({ levels, level: getLevelByEnv() }),
+    );
   });
 });

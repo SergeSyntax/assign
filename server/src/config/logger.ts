@@ -1,17 +1,9 @@
 import { LoggerOptions } from 'winston';
 import { AbstractConfigSetColors } from 'winston/lib/winston/config';
-import { TimestampOptions, ColorizeOptions, TransformableInfo } from 'logform';
+import { TimestampOptions, ColorizeOptions } from 'logform';
 import { FileTransportOptions } from 'winston/lib/winston/transports';
 import { Env } from './constants';
 import { isEnv } from './environment';
-
-const formatMessage = ({ timestamp, level, message }: TransformableInfo) => `${timestamp} ${level}: ${message}`;
-
-const formatMessageWithStack = ({ timestamp, level, message, stack }: TransformableInfo) =>
-  `${timestamp} ${level}: ${message}\n${stack}`;
-
-export const format = (info: TransformableInfo) =>
-  Boolean(info?.stack) ? formatMessageWithStack(info) : formatMessage(info);
 
 const enum LevelType {
   ERROR = 'error',
