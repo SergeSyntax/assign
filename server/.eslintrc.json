@@ -4,7 +4,7 @@
     "node": true,
     "jest": true
   },
-  "extends": ["airbnb-base", "airbnb-typescript", "prettier", "plugin:jest/recommended"],
+  "extends": ["airbnb-base", "airbnb-typescript", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -12,6 +12,14 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "jest"],
+  "overrides": [
+    {
+      "files": ["test/**"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"],
+      "rules": { "jest/prefer-expect-assertions": "off" }
+    }
+  ],
   "rules": {
     "import/prefer-default-export": "off"
   }

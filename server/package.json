@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/src/index.js",
+  "_moduleAliases": {
+    "foo": "dist"
+  },
   "scripts": {
-    "start": "ts-node ./src/index.ts",
+    "prestart": "tsc",
+    "start": "TS_NODE_BASEURL=./dist node -r tsconfig-paths/register .",
     "dev": "nodemon ./src/index.ts",
     "lint": "eslint src --ext .ts",
     "format": "prettier --config .prettierrc.json --write src/**/*.ts --ignore-path .gitignore",
