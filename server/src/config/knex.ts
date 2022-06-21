@@ -46,6 +46,8 @@ const seeds = freeze<Knex.SeederConfig>({
  */
 const pool = freeze<Knex.PoolConfig>({ min: 0, max: 10 });
 
+const debug = ({ sql }) => Logger.debug(sql);
+
 const DATABASE_CONFIG = freeze<Knex.Config>({
   client,
   connection,
@@ -57,7 +59,7 @@ const DATABASE_CONFIG = freeze<Knex.Config>({
     warn: Logger.warn,
     error: Logger.error,
     deprecate: Logger.error,
-    debug: Logger.debug,
+    debug,
   },
   /**
    * turn on stack trace capture for all query builders, raw queries and schema builders.
