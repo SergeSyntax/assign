@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material';
-import { theme } from '../../styles';
+import { theme } from '../styles';
 
 /**
  * @link https://testing-library.com/docs/react-testing-library/setup/#configuring-jest-with-test-utils
