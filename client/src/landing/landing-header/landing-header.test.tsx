@@ -1,5 +1,5 @@
 import { LandingHeader } from '../..';
-import { render, screen } from '@testing-library/react';
+import { render, screen } from 'test-utils';
 
 describe('<LandingHeader />', () => {
   it('should render', () => {
@@ -20,10 +20,8 @@ describe('<LandingHeader />', () => {
   });
 
   it('should include button sign in', () => {
-    const { container } = render(<LandingHeader />);
+    render(<LandingHeader />);
     const logo = screen.queryByRole('link', { name: /sign in/i });
-    // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
     expect(logo).toBeInTheDocument();
   });
 });

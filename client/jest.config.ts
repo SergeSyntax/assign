@@ -78,10 +78,12 @@ const customJestConfig = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  // moduleDirectories: [
-  //   "node_modules"
-  // ],
-
+  moduleDirectories: [
+    'node_modules',
+    // add the directory with the test-utils.js file, for example:
+    'test', // a utility folder
+    __dirname, // the root directory
+  ],
   // An array of file extensions your modules use
   // moduleFileExtensions: [
   //   "js",
@@ -197,15 +199,6 @@ const customJestConfig = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-};
-
-const old = {
-  moduleNameMapper: {
-    // Handle module aliases (this will be automatically configured for you soon)
-    '^@/components/(.*)$': '<rootDir>/components/$1',
-
-    '^@/pages/(.*)$': '<rootDir>/pages/$1',
-  },
 };
 
 export default createJestConfig(customJestConfig);

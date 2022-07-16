@@ -33,7 +33,7 @@ export const LandingHeader: React.FC = () => {
           <LandingHeaderButtonSecondary variant="outlined">sign in</LandingHeaderButtonSecondary>
         </Link>
       </LandingHeaderActions>
-      <DownButton onClick={handleDownButtonClick} />
+      <DownButton aria-label="Scroll down button" onClick={handleDownButtonClick} type="button" />
     </LandingHeaderWrapper>
   );
 };

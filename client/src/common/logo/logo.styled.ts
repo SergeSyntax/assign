@@ -1,20 +1,6 @@
 import { styled } from '@mui/material';
 import { MdDashboard } from 'react-icons/md';
 
-export const LogoIcon = styled(MdDashboard)`
-  margin-right: 0.3rem;
-  font-size: 1.1em;
-`;
-
-export const LogoText = styled('h1')`
-  font-family: 'Permanent Marker';
-  user-select: none;
-  letter-spacing: 0.3rem;
-  font-size: inherit;
-  line-height: 1;
-  margin: 0;
-`;
-
 export const LogoWrapper = styled('a')`
   display: inline-flex;
   align-items: center;
@@ -35,3 +21,17 @@ export const LogoWrapper = styled('a')`
 `;
 
 LogoWrapper.defaultProps = { href: '/' };
+
+export const LogoIcon = styled(MdDashboard)`
+  margin-right: 0.3rem;
+  font-size: 1.1em;
+`;
+
+export const LogoText = styled('h1')`
+  font-family: 'Permanent Marker';
+  user-select: none;
+  letter-spacing: 0.3rem;
+  font-size: inherit;
+  line-height: 1;
+  margin: 0;
+`;

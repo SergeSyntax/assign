@@ -4,3 +4,10 @@
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
+
+import { configure } from '@testing-library/react';
+
+/**
+ * @link https://testing-library.com/docs/dom-testing-library/api-configuration
+ */
+configure({ throwSuggestions: true, asyncUtilTimeout: 800 });
