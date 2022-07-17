@@ -17,6 +17,7 @@ import {
 } from 'apollo-server-core';
 import { isEnv } from './config/environment';
 import { Env } from './config/constants';
+import { resolvers } from './resolvers';
 
 export class App {
   app = express();
@@ -48,8 +49,8 @@ export class App {
 
   getSchema() {
     const schema = makeExecutableSchema({
-      typeDefs: typeDefs,
-      resolvers: {},
+      typeDefs,
+      resolvers,
     });
     return constraintDirective()(schema);
   }

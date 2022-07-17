@@ -21,10 +21,10 @@ export const usersSchemas = gql`
   }
 
   type Mutation {
-    registration(data: CreateUserData!): User
+    registration(data: CreateUserData!): User!
   }
 
   type Query {
-    profile: User
+    profile: User!
   }
 `;

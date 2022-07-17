@@ -15,7 +15,9 @@ const getTableAliasFromName = (name: string): string =>
 /**
  */
 export abstract class Repository<T = any, S = any> {
-  knex = pool.knex;
+  public get knex() {
+    return pool.knex;
+  }
 
   public get tableName(): string {
     return this.repositoryConfig.tableName;
@@ -32,6 +34,6 @@ export abstract class Repository<T = any, S = any> {
   constructor(public repositoryConfig: RepositoryConfig) {}
 
   getBuilder(): Knex.QueryBuilder<T> {
-    return pool.knex(this.table);
+    return this.knex(this.table);
   }
 }
