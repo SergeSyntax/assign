@@ -1,0 +1,421 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <div
+    class="css-1enisn"
+  >
+    <a
+      class="css-8k87kv"
+      href="/"
+    >
+      <svg
+        class="css-nc7tph"
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 0h24v24H0z"
+          fill="none"
+        />
+        <path
+          d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+        />
+      </svg>
+      <h1
+        class="css-3twu5s"
+      >
+        Assign
+      </h1>
+    </a>
+    <h1
+      class="css-1szs7ji"
+    >
+      <span
+        class="css-1l995r1"
+      >
+        assign your team
+      </span>
+      <span
+        class="css-iixdt2"
+      >
+        to the right direction
+      </span>
+    </h1>
+    <div
+      class="css-1fp3c9n"
+    >
+      <a
+        class="MuiButton-root MuiButton-contained MuiButton-containedInherit MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorInherit MuiButtonBase-root css-1aub1mo-MuiButtonBase-root-MuiButton-root"
+        href="/registration"
+        tabindex="0"
+      >
+        join now
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </a>
+      <a
+        class="MuiButton-root MuiButton-outlined MuiButton-outlinedInherit MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorInherit MuiButtonBase-root css-1g6yw9l-MuiButtonBase-root-MuiButton-root"
+        href="/login"
+        tabindex="0"
+      >
+        sign in
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </a>
+    </div>
+    <button
+      aria-label="Scroll down button"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-1al2hqg-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <section
+    class="css-1njmecu"
+  >
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1shlwwy-MuiContainer-root"
+    >
+      <img
+        alt="about-paragraph"
+        class="css-1b976g7"
+        src="/img/about-image.svg"
+      />
+      <div
+        class="css-195dmev"
+      >
+        <div
+          class="css-tyn5qm"
+        >
+          <img
+            alt="about-paragraph"
+            class="css-1anvkcu"
+            src="/img/rubric-list-scutch.svg"
+          />
+          <h3
+            class="css-64a91t"
+          >
+            where team work get efficient!
+          </h3>
+          <p
+            class="css-1y7fiy2"
+          >
+            Assign's panel is a cross-platform/device task manager that will help you keep your tasks
+      organized, detailed and simple: get more work done by breaking your goals down to tasks
+      and prioritize them by the sections you define.
+          </p>
+        </div>
+        <div
+          class="css-tyn5qm"
+        >
+          <img
+            alt="about-paragraph"
+            class="css-1anvkcu"
+            src="/img/rubric-list-choose.svg"
+          />
+          <h3
+            class="css-64a91t"
+          >
+            where services free!
+          </h3>
+          <p
+            class="css-1y7fiy2"
+          >
+            There no service limitations, subscription, or any charges regarding the application, all
+      the developers working on that project doing that voluntarily for other developers to use,
+      there is a donation option for hosing expenses.
+          </p>
+        </div>
+        <div
+          class="css-tyn5qm"
+        >
+          <img
+            alt="about-paragraph"
+            class="css-1anvkcu"
+            src="/img/rubric-list-phone.svg"
+          />
+          <h3
+            class="css-64a91t"
+          >
+            where your opinion matters!
+          </h3>
+          <p
+            class="css-1y7fiy2"
+          >
+            Got a manual task that you prefer to be automated or a feature that you would like to be
+      added to our task manager to make your life easier? Send us feedback and we will try to
+      make it happen, our Team always working on forwarding our project and we open for
+      suggestions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section
+    class="css-1sfybyv"
+  >
+    <video
+      autoplay=""
+      class="css-1yx6b0k"
+      loop=""
+      src="/video/features-video-background.mp4"
+    />
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-686ifx-MuiContainer-root"
+    >
+      <div
+        class="css-1xw8f9t"
+      >
+        <svg
+          class="css-t4g28x"
+          fill="none"
+          height="1em"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+          />
+          <circle
+            cx="9"
+            cy="7"
+            r="4"
+          />
+          <path
+            d="M23 21v-2a4 4 0 0 0-3-3.87"
+          />
+          <path
+            d="M16 3.13a4 4 0 0 1 0 7.75"
+          />
+        </svg>
+        <h3
+          class="css-1cx156y"
+        >
+          Choose your Teammates
+        </h3>
+        <p
+          class="css-m8bx39"
+        >
+          Assign provide you the project collaborators system which give you the ability to filter
+      unwanted participants and define your teammates rolls in your personal or organization
+      projects.
+        </p>
+      </div>
+      <div
+        class="css-1xw8f9t"
+      >
+        <svg
+          class="css-t4g28x"
+          fill="none"
+          height="1em"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <polygon
+            points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+          />
+        </svg>
+        <h3
+          class="css-1cx156y"
+        >
+          Pick your goals
+        </h3>
+        <p
+          class="css-m8bx39"
+        >
+          Assign watch features allow you to track the specific information required to make your
+      Job done. You can fallow a whole project, specific section of that project or a single
+      task with out getting unwanted information.
+        </p>
+      </div>
+      <div
+        class="css-1xw8f9t"
+      >
+        <svg
+          class="css-t4g28x"
+          fill="none"
+          height="1em"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+          />
+          <circle
+            cx="12"
+            cy="12"
+            r="3"
+          />
+        </svg>
+        <h3
+          class="css-1cx156y"
+        >
+          Team transparency
+        </h3>
+        <p
+          class="css-m8bx39"
+        >
+          Assign's Task management Push data to clients that gets represented as real-time counters,
+      charts or logs that allow users to concurrently edit a document and see each other's
+      changes.
+        </p>
+      </div>
+    </div>
+  </section>
+  <footer
+    class="css-fau56z"
+  >
+    <a
+      class="css-tgea4f"
+      href="/"
+    >
+      <svg
+        class="css-nc7tph"
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 0h24v24H0z"
+          fill="none"
+        />
+        <path
+          d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+        />
+      </svg>
+      <h1
+        class="css-3twu5s"
+      >
+        Assign
+      </h1>
+    </a>
+    <ul
+      class="css-10q5llh"
+    >
+      <li
+        class="css-mudlou"
+      >
+        <a
+          class="css-k4rbp8"
+          href="/"
+        >
+          terms and conditions
+           
+        </a>
+      </li>
+      <li
+        class="css-mudlou"
+      >
+        <a
+          class="css-k4rbp8"
+          href="/"
+        >
+          privacy notice
+           
+        </a>
+      </li>
+      <li
+        class="css-mudlou"
+      >
+        <a
+          class="css-k4rbp8"
+          href="/"
+        >
+          cookie notice
+           
+        </a>
+      </li>
+      <li
+        class="css-mudlou"
+      >
+        <a
+          class="css-k4rbp8"
+          href="/"
+        >
+          contact
+           
+        </a>
+      </li>
+    </ul>
+  </footer>
+  <div
+    class="css-3u73wy"
+  >
+    <p
+      class="css-tif36z"
+    >
+      © Sergway Khodyachikh 
+      <svg
+        class="css-jojfed"
+        fill="currentColor"
+        height="1em"
+        role="img"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title />
+        <path
+          d="M14.4 3.686L7.2 16.16 4.8 12l4.8-8.314H4.8L0 12l2.4 4.159 2.4 4.155h4.8l7.2-12.469L19.2 12l-4.8 8.314h4.8l2.4-4.155L24 12l-2.4-4.155-2.4-4.159Z"
+        />
+      </svg>
+    </p>
+  </div>
+  <button
+    class="MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-default css-17xztg-MuiButtonBase-root-MuiFab-root"
+    style="transform: scale(0); visibility: hidden;"
+    tabindex="0"
+    type="button"
+  >
+    <svg
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 512 512"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M256 217.9L383 345c9.4 9.4 24.6 9.4 33.9 0 9.4-9.4 9.3-24.6 0-34L273 167c-9.1-9.1-23.7-9.3-33.1-.7L95 310.9c-4.7 4.7-7 10.9-7 17s2.3 12.3 7 17c9.4 9.4 24.6 9.4 33.9 0l127.1-127z"
+      />
+    </svg>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;

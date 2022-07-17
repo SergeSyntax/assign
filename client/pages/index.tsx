@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { About, Features, LandingFooter, LandingHeader, ScrollUpButton, SEO } from '../src';
+import { About, Features, LandingFooter, LandingHeader, ScrollUpButton, SEO } from 'src';
 
 const Home: NextPage = () => {
   return (

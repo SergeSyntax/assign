@@ -4,6 +4,11 @@
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
+/**
+ * @link https://emotion.sh/docs/@emotion/jest#custom-matchers
+ */
+import { matchers } from '@emotion/jest';
+expect.extend(matchers);
 
 import { configure } from '@testing-library/react';
 
