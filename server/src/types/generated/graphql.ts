@@ -23,7 +23,7 @@ export type CreateUserData = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  registration?: Maybe<User>;
+  registration: User;
 };
 
 
@@ -33,7 +33,7 @@ export type MutationRegistrationArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  profile?: Maybe<User>;
+  profile: User;
 };
 
 export enum Role {
@@ -47,7 +47,6 @@ export type User = {
   email: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
-  token: Scalars['String'];
 };
 
 
@@ -141,18 +140,17 @@ export type ResolversParentTypes = {
 };
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  registration?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationRegistrationArgs, 'data'>>;
+  registration?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegistrationArgs, 'data'>>;
 };
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  profile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  profile?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

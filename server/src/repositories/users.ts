@@ -1,6 +1,8 @@
+import { createUserValidation, updateUserValidation } from 'src/models/users';
 import { CreateUserData } from 'src/types/generated/graphql';
 import { User } from 'src/types/user';
 import { Repository } from 'src/utils/repository';
+import { Validation } from 'src/utils/validation';
 
 const returnedColumn: (keyof User)[] = [
   'id',
@@ -15,10 +17,12 @@ class UsersRepository extends Repository<User, CreateUserData> {
   constructor() {
     super({
       tableName: 'users',
+      createValidation: createUserValidation,
     });
   }
 
   create(data: CreateUserData) {
+    this.createValidation?.validate(data);
     return this.getBuilder().insert(data, ['id', 'name', 'email', 'role']);
   }
 

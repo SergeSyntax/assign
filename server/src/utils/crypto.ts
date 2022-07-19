@@ -11,6 +11,9 @@ interface JWTPayload {
   iat: Date;
 }
 
+export const AUTH_HEADER = 'Authorization';
+export const BEARER_PREFIX = 'Bearer';
+
 const verifyJWT = promisify(jwt.verify) as any;
 
 export const signJWT = ({ id, role }: User) =>

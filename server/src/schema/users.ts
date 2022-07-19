@@ -17,7 +17,6 @@ export const usersSchemas = gql`
     id: ID!
     name: String!
     email: String!
-    token: String!
   }
 
   type Mutation {
