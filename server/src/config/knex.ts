@@ -46,7 +46,7 @@ const seeds = freeze<Knex.SeederConfig>({
  */
 const pool = freeze<Knex.PoolConfig>({ min: 0, max: 10 });
 
-const debug = ({ sql }) => Logger.debug(sql);
+const debug = ({ sql, bindings }) => Logger.debug(JSON.stringify({ sql, bindings }, null, 2));
 
 const DATABASE_CONFIG = freeze<Knex.Config>({
   client,
