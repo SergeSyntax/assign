@@ -1,4 +1,4 @@
-import { createUserValidation, updateUserValidation } from 'src/models/users';
+import { createUserValidation } from 'src/models/users';
 import { CreateUserData } from 'src/types/generated/graphql';
 import { User } from 'src/types/user';
 import { Repository } from 'src/utils/repository';

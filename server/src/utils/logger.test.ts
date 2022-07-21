@@ -1,3 +1,11 @@
+import {
+  timestampOptions,
+  colorizeOptions,
+  colors,
+  levels,
+  getLevelByEnv,
+} from 'src/config/logger';
+
 const returnArgs = (args: unknown) => args;
 
 const mockAddColor = jest.fn();
@@ -22,14 +30,6 @@ jest.mock('winston', () => {
     addColors: mockAddColor,
   };
 });
-
-import {
-  timestampOptions,
-  colorizeOptions,
-  colors,
-  levels,
-  getLevelByEnv,
-} from 'src/config/logger';
 
 describe('logger', () => {
   it('should be configured', async () => {

@@ -1,4 +1,4 @@
+import { getTypeDef } from './common';
 import { usersSchemas } from './users';
-import { constraintDirectiveTypeDefs } from 'graphql-constraint-directive';
 
-export const typeDefs = [constraintDirectiveTypeDefs, usersSchemas];
+export const typeDefs = getTypeDef(usersSchemas);

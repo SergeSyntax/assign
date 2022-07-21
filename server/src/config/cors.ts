@@ -1,9 +1,9 @@
 import { CorsOptions } from 'cors';
-import { CLIENT_URL } from './environment';
+import { APOLLO_GRAPHQL_ORIGIN, Env } from './constants';
+import { CLIENT_URL, isEnv } from './environment';
 
-// TODO: extract origin to constant
 export const corsOptions: CorsOptions = {
-  origin: [CLIENT_URL, 'https://studio.apollographql.com'],
+  origin: isEnv(Env.Development) ? [CLIENT_URL, APOLLO_GRAPHQL_ORIGIN] : [CLIENT_URL],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 };
