@@ -1,7 +1,11 @@
 import { app } from './app';
-import { knexConfig } from './config/knex';
-import { handleProcessError } from './utils/errors';
-import { pool } from './utils/pool';
+import { Logger, pool } from '@/common/utils';
+import { knexConfig } from '@/common/config';
+
+const handleProcessError = (err: unknown) => {
+  Logger.error(err);
+  process.exit(1);
+};
 
 process.on('uncaughtException', handleProcessError);
 process.on('unhandledRejection', handleProcessError);

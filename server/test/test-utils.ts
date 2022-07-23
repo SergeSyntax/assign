@@ -1,8 +1,8 @@
+import { DocumentNode } from 'graphql';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { ApolloServer } from 'apollo-server-express';
-import { DocumentNode } from 'graphql';
 import { constraintDirective } from 'graphql-constraint-directive';
-import { getTypeDef } from 'src/schema/common';
+import { getTypeDef } from '@/common/utils/apollo';
 
 const getSchema = (typeDefs: DocumentNode[]) => {
   const schema = makeExecutableSchema({

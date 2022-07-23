@@ -1,7 +1,5 @@
-import { DATABASE_NAME } from 'src/config/environment';
-import { rootKnexConfig } from 'src/config/knex';
-import { Logger } from 'src/utils/logger';
-import { pool } from 'src/utils/pool';
+import { Logger, pool } from '@/common/utils';
+import { DATABASE_NAME, rootKnexConfig } from '@/common/config';
 
 async function createDatabase() {
   try {

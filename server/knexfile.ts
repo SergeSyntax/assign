@@ -1,4 +1,4 @@
 /**
  * knex cli configuration
  */
-export { knexConfig as default } from 'src/config/knex';
+export { knexConfig as default } from './src/common/config';

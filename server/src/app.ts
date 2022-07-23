@@ -2,13 +2,10 @@ import express, { Express, json } from 'express';
 import http from 'http';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
-import { corsOptions } from './config/cors';
-import { cookieSessionOptions } from './config/cookie-session';
 import { passport } from './services';
-import { Apollo } from './apollo';
-import { isEnv, PORT } from './config/environment';
-import { Logger } from './utils/logger';
-import { Env } from './config/constants';
+import { isEnv, PORT, cookieSessionOptions, corsOptions, Env } from './common/config';
+import { Logger } from '@/common/utils';
+import { Apollo } from './common/utils/apollo';
 
 export class App {
   public app: Express;

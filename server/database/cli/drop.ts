@@ -1,7 +1,5 @@
-import { DATABASE_NAME } from 'src/config/environment';
-import { rootKnexConfig } from 'src/config/knex';
-import { Logger } from 'src/utils/logger';
-import { pool } from 'src/utils/pool';
+import { Logger, pool } from '@/common/utils';
+import { DATABASE_NAME, rootKnexConfig } from '@/common/config';
 
 async function dropDatabase() {
   try {
@@ -11,6 +9,7 @@ async function dropDatabase() {
     await pool.close();
   } catch (err) {
     Logger.error(`database "${DATABASE_NAME}" not exists`);
+    process.exit(1);
   }
 }
 

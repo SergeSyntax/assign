@@ -1,6 +1,6 @@
-import passport, { Profile } from 'passport';
-import { User } from 'src/types/user';
-import { signJWT } from 'src/utils/crypto';
+import passport from 'passport';
+import { User } from 'src/auth';
+import { signJWT } from 'src/auth/auth.utils';
 
 passport.serializeUser((user, done) => {
   const token = signJWT(user as User);
