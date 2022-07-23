@@ -10,8 +10,8 @@
     "lint": "eslint src --ext .ts",
     "format": "prettier --config .prettierrc.json --write src/**/*.ts --ignore-path .gitignore",
     "test": "jest --config ./test/jest.config.ts --watch",
-    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest --runInBand --config ./test/jest.config.ts --no-catch --watch",
-    "test:e2e": "jest --config ./test/jest-e2e.config.ts",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest --runInBand  --no-cache --config ./test/jest.config.ts --no-catch --watch",
+    "test:e2e": "jest --config ./test/jest-e2e.config.ts --runInBand --no-cache",
     "test:cov": "jest --coverage",
     "codegen": "graphql-codegen --config codegen.yml",
     "db:init": "ts-node database/cli/create",
@@ -25,6 +25,7 @@
   "author": "Sergey Khodyachikh",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^7.3.0",
     "@graphql-tools/schema": "^8.5.0",
     "@graphql-tools/utils": "^8.8.0",
     "@types/cookie-session": "^2.0.44",

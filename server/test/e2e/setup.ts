@@ -30,3 +30,5 @@ beforeAll(async () => {
   global.context = await Context.build(httpServer);
 });
 afterAll(() => global.context.close());
+
+beforeEach(() => pool.knex.seed.run());

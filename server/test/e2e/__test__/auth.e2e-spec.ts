@@ -1,34 +1,85 @@
+import { faker } from '@faker-js/faker';
 import { gql } from 'apollo-server-core';
-import { graphqlRequest } from '../graphql-request';
+import _ from 'lodash';
 
-describe('users', () => {
-  describe('user register', () => {
-    it('should return a user', async () => {
-      const user = {
-        email: 'tesfxxtta@ffafest.com',
-        password: 'test',
-        name: 'test',
-      };
+import {
+  graphqlRequest,
+  getApolloResponseErrorCode,
+  getApolloResponseData,
+  ApolloResponse,
+} from '../test-graphql-utils';
 
-      const res = await graphqlRequest({
-        query: gql`
-          mutation Mutation($data: CreateUserData!) {
-            registration(data: $data) {
-              id
-              name
-              email
-            }
-          }
-        `,
-        variables: {
-          data: user,
-        },
+const user = {
+  email: faker.internet.email('test'),
+  password: faker.lorem.word(1),
+  name: faker.name.firstName('male'),
+};
+
+const query = gql`
+  mutation Mutation($data: CreateUserData!) {
+    registration(data: $data) {
+      id
+      name
+      email
+    }
+  }
+`;
+
+describe('auth', () => {
+  describe('Mutation', () => {
+    describe('registration(data: CreateUserData!): User!', () => {
+      const getRegistrationData = (res: ApolloResponse) =>
+        getApolloResponseData(res, 'registration');
+
+      it('should return error if password is missing', async () => {
+        const res = await graphqlRequest({
+          query,
+          variables: {
+            data: _.omit(user, 'password'),
+          },
+        });
+
+        expect(getApolloResponseErrorCode(res)).toBe('BAD_USER_INPUT');
       });
 
-      // TODO: header and cookie check
-      expect(res.body.data.registration).toEqual(
-        expect.objectContaining({ email: user.email, name: user.name }),
-      );
+      it('should return error if email is missing', async () => {
+        const res = await graphqlRequest({
+          query,
+          variables: {
+            data: _.omit(user, 'email'),
+          },
+        });
+
+        expect(getApolloResponseErrorCode(res)).toBe('BAD_USER_INPUT');
+      });
+
+      it('should return user if name is missing', async () => {
+        const res = await graphqlRequest({
+          query,
+          variables: {
+            data: _.omit(user, 'name'),
+          },
+        });
+
+        expect(getRegistrationData(res)).toEqual(
+          expect.objectContaining({ email: user.email, name: 'unknown' }),
+        );
+      });
+
+      it('should return a user', async () => {
+        const res = await graphqlRequest({
+          query,
+          variables: {
+            data: user,
+          },
+        });
+
+        expect(getRegistrationData(res)).toEqual(
+          expect.objectContaining({ email: user.email, name: user.name }),
+        );
+        expect(res.header.authorization).toMatch(/^Bearer\s\S+/);
+        expect(res.header['set-cookie'][0]).toMatch(/^session=.+/);
+      });
     });
   });
 });
