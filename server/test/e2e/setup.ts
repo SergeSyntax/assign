@@ -26,6 +26,7 @@ declare global {
 }
 
 beforeAll(async () => {
-  // global.context = await Context.build(app.httpServer);
+  const httpServer = await app.init();
+  global.context = await Context.build(httpServer);
 });
-// afterAll(() => global.context.close());
+afterAll(() => global.context.close());

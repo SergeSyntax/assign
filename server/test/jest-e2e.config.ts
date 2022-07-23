@@ -59,10 +59,10 @@ export default {
   // forceCoverageMatch: [],
 
   // A path to a module which exports an async function that is triggered once before all test suites
-  globalSetup: '<rootDir>/e2e/scripts/global-setup.js',
+  globalSetup: '<rootDir>/test/e2e/scripts/global-setup.js',
 
   // A path to a module which exports an async function that is triggered once after all test suites
-  globalTeardown: '<rootDir>/e2e/scripts/global-teardown.js',
+  globalTeardown: '<rootDir>/test/e2e/scripts/global-teardown.js',
 
   // A set of global variables that need to be available in all test environments
   // globals: {},
@@ -83,7 +83,7 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^@/common/(.*)$': '<rootDir>/../src/common/$1',
+    '^@/common/(.*)$': '<rootDir>/src/common/$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -117,7 +117,7 @@ export default {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-  rootDir: '.',
+  rootDir: '..',
 
   // A list of paths to directories that Jest should use to search for files in
   // roots: ['<rootDir>/src'],
@@ -129,7 +129,7 @@ export default {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['<rootDir>/e2e/setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/e2e/setup.ts'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,

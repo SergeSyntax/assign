@@ -9,7 +9,7 @@
     "dev": "nodemon ./src/index.ts",
     "lint": "eslint src --ext .ts",
     "format": "prettier --config .prettierrc.json --write src/**/*.ts --ignore-path .gitignore",
-    "test": "jest --watch",
+    "test": "jest --config ./test/jest.config.ts --watch",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.config.ts",
     "test:cov": "jest --coverage",
