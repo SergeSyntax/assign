@@ -1,18 +1,20 @@
-import { faker } from '@faker-js/faker';
-import { gql } from 'apollo-server-core';
 import _ from 'lodash';
-
+import { gql } from 'apollo-server-core';
 import {
-  graphqlRequest,
-  getApolloResponseErrorCode,
-  getApolloResponseData,
   ApolloResponse,
+  getApolloResponseData,
+  getApolloResponseError,
+  graphqlRequest,
 } from '../test-graphql-utils';
+import { registration } from 'src/auth/users.service';
+import { User } from '@/common/types';
+
+const BAD_USER_INPUT = 'BAD_USER_INPUT';
 
 const user = {
-  email: faker.internet.email('test'),
-  password: faker.lorem.word(1),
-  name: faker.name.firstName('male'),
+  email: 'test@test.com',
+  password: 'password',
+  name: 'test',
 };
 
 const query = gql`
@@ -25,12 +27,14 @@ const query = gql`
   }
 `;
 
+const getCookie = (res: ApolloResponse) => res.header['set-cookie'][0];
+const getAuthHeader = (res: ApolloResponse) => res.header.authorization;
+
 describe('auth', () => {
   describe('Mutation', () => {
     describe('registration(data: CreateUserData!): User!', () => {
-      const getRegistrationData = (res: ApolloResponse) =>
-        getApolloResponseData(res, 'registration');
-
+      const getRegistrationRes = (res: ApolloResponse) =>
+        getApolloResponseData<User>(res).registration;
       it('should return error if password is missing', async () => {
         const res = await graphqlRequest({
           query,
@@ -39,7 +43,7 @@ describe('auth', () => {
           },
         });
 
-        expect(getApolloResponseErrorCode(res)).toBe('BAD_USER_INPUT');
+        expect(getApolloResponseError(res).extensions.code).toBe(BAD_USER_INPUT);
       });
 
       it('should return error if email is missing', async () => {
@@ -50,7 +54,7 @@ describe('auth', () => {
           },
         });
 
-        expect(getApolloResponseErrorCode(res)).toBe('BAD_USER_INPUT');
+        expect(getApolloResponseError(res).extensions.code).toBe(BAD_USER_INPUT);
       });
 
       it('should return user if name is missing', async () => {
@@ -61,9 +65,11 @@ describe('auth', () => {
           },
         });
 
-        expect(getRegistrationData(res)).toEqual(
+        expect(getRegistrationRes(res)).toEqual(
           expect.objectContaining({ email: user.email, name: 'unknown' }),
         );
+        expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
+        expect(getCookie(res)).toMatch(/^session=.+/);
       });
 
       it('should return a user', async () => {
@@ -74,11 +80,25 @@ describe('auth', () => {
           },
         });
 
-        expect(getRegistrationData(res)).toEqual(
+        expect(getRegistrationRes(res)).toEqual(
           expect.objectContaining({ email: user.email, name: user.name }),
         );
-        expect(res.header.authorization).toMatch(/^Bearer\s\S+/);
-        expect(res.header['set-cookie'][0]).toMatch(/^session=.+/);
+        expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
+        expect(getCookie(res)).toMatch(/^session=.+/);
+      });
+
+      it('should return a user', async () => {
+        await registration(user);
+
+        const res = await graphqlRequest({
+          query,
+          variables: {
+            data: user,
+          },
+        });
+        const { extensions, message } = getApolloResponseError(res);
+        expect(extensions.code).toBe(BAD_USER_INPUT);
+        expect(message).toMatch(/^the email address already in use$/i);
       });
     });
   });

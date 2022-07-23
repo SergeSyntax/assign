@@ -10,7 +10,7 @@
     "lint": "eslint src --ext .ts",
     "format": "prettier --config .prettierrc.json --write src/**/*.ts --ignore-path .gitignore",
     "test": "jest --config ./test/jest.config.ts --watch",
-    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest --runInBand  --no-cache --config ./test/jest.config.ts --no-catch --watch",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest --runInBand  --no-cache --config ./test/jest.config.ts --watch",
     "test:e2e": "jest --config ./test/jest-e2e.config.ts --runInBand --no-cache",
     "test:cov": "jest --coverage",
     "codegen": "graphql-codegen --config codegen.yml",

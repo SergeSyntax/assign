@@ -29,7 +29,7 @@ export const hash = (password: string): Promise<string> =>
 
     crypto.scrypt(password, salt, 64, (err, derivedKey) => {
       if (err) return reject(err);
-      return resolve(`${salt}:${derivedKey}`);
+      return resolve(JSON.stringify(`${salt}:${derivedKey}`));
     });
   });
 
@@ -38,6 +38,6 @@ export const verify = async (password: string, hash: string) =>
     const [salt, key] = hash.split(':');
     crypto.scrypt(password, salt, 64, (err, derivedKey) => {
       if (err) reject(err);
-      resolve(key == derivedKey.toString('hex'));
+      resolve(key == JSON.stringify(derivedKey.toString('hex')));
     });
   });

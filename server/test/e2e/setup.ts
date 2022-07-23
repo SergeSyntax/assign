@@ -31,4 +31,6 @@ beforeAll(async () => {
 });
 afterAll(() => global.context.close());
 
-beforeEach(() => pool.knex.seed.run());
+beforeEach(async () => {
+  await pool.knex.seed.run();
+});
