@@ -2,9 +2,10 @@ import express, { Express, json } from 'express';
 import http from 'http';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
-import { passport } from './services';
+import helmet from 'helmet';
+import compression from 'compression';
 import { isEnv, PORT, cookieSessionOptions, corsOptions, Env } from './common/config';
-import { Logger } from '@/common/utils';
+import { Logger, passport } from '@/common/utils';
 import { Apollo } from './common/utils/apollo';
 
 export class App {
@@ -18,8 +19,13 @@ export class App {
     this.apollo = new Apollo(this.httpServer, this.app);
   }
 
+  applyProductionMiddleware() {
+    this.app.use(helmet());
+    this.app.use(compression());
+  }
+
   applyMiddleware() {
-    this.app.use(json());
+    this.app.use(json({ limit: '50kb' }));
     this.app.use(cors(corsOptions));
     this.app.use(cookieSession(cookieSessionOptions));
     this.app.use(passport.initialize());
@@ -28,6 +34,7 @@ export class App {
 
   async init() {
     this.applyMiddleware();
+    if (isEnv(Env.Production)) this.applyProductionMiddleware();
     await this.apollo.start();
     return this.httpServer;
   }

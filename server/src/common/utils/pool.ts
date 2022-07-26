@@ -1,12 +1,13 @@
 import { Knex, knex } from 'knex';
 import format from 'pg-format';
+import { rootKnexConfig } from '../config';
 import { Logger } from './logger';
 
 class Pool {
   private _knex!: Knex;
 
   public get knex(): Knex {
-    return this._knex;
+    return this._knex ?? knex(rootKnexConfig);
   }
 
   public set knex(knexInstance: Knex) {

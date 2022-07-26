@@ -1,4 +1,3 @@
-import { isEnv, Env } from '@/common/config/environment';
 import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginDrainHttpServerOptions,
@@ -7,12 +6,14 @@ import {
   ApolloServerPluginUsageReportingDisabled,
   Config,
 } from 'apollo-server-core';
+import { faker } from '@faker-js/faker';
+import { isEnv, Env } from '@/common/config/environment';
 
 const landingPageDefaultVariables = {
   createUserData: {
-    email: 'test@test.com',
-    password: 'test',
-    name: 'test',
+    email: faker.internet.email(),
+    password: faker.music.songName(),
+    name: faker.name.firstName(),
   },
 };
 

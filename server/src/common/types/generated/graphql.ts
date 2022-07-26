@@ -28,7 +28,7 @@ export type Mutation = {
 
 
 export type MutationRegistrationArgs = {
-  data: CreateUserData;
+  createUserData: CreateUserData;
 };
 
 export type Query = {
@@ -141,7 +141,7 @@ export type ResolversParentTypes = {
 };
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  registration?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegistrationArgs, 'data'>>;
+  registration?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegistrationArgs, 'createUserData'>>;
 };
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

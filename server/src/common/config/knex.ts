@@ -1,3 +1,4 @@
+import { Logger } from '../utils';
 import { Knex } from 'knex';
 import {
   DATABASE_HOST,
@@ -11,17 +12,8 @@ import {
   isEnv,
   NODE_ENV,
 } from './environment';
-import { Logger } from '../utils';
 
-type KnexConfigBaseOnEnv = { [key in Env]: Knex.Config };
-const { freeze } = Object;
-
-/**
- * @link https://github.com/vincit/tarn.js
- */
-const debug = ({ sql, bindings }) => Logger.debug(JSON.stringify({ sql, bindings }, null, 2));
-
-const DATABASE_CONFIG = freeze<Knex.Config>({
+const DATABASE_CONFIG = Object.freeze<Knex.Config>({
   client: DATABASE_CLIENT,
   connection: {
     host: DATABASE_HOST,
@@ -40,12 +32,15 @@ const DATABASE_CONFIG = freeze<Knex.Config>({
     extension: 'ts',
     directory: `database/seeds`,
   },
-  debug: true,
+  debug: isEnv(Env.Development),
+  /**
+   * @link https://github.com/vincit/tarn.js
+   */
   log: {
-    warn: (...msg) => Logger.warn(...msg),
-    error: (...msg) => Logger.error(...msg),
-    deprecate: (...msg) => Logger.error(...msg),
-    debug,
+    warn: (msg) => Logger.warn(msg),
+    error: (msg) => Logger.error(msg),
+    deprecate: (msg) => Logger.error(msg),
+    debug: ({ sql, bindings }) => Logger.debug({ sql, bindings }),
   },
   /**
    * turn on stack trace capture for all query builders, raw queries and schema builders.
@@ -57,17 +52,17 @@ const DATABASE_CONFIG = freeze<Knex.Config>({
   asyncStackTraces: isEnv(Env.Development),
 });
 
-const config: KnexConfigBaseOnEnv = {
+const config = Object.freeze<Record<Env, Knex.Config>>({
   [Env.Development]: DATABASE_CONFIG,
   [Env.Test]: DATABASE_CONFIG,
   [Env.Production]: DATABASE_CONFIG,
-};
+});
 
 /**
  * use root knex config to create or remove database with available connection via
  * DATABASE_ROOT_CONNECTION env variable.
  */
-export const rootKnexConfig = freeze<Knex.Config>({
+export const rootKnexConfig = Object.freeze<Knex.Config>({
   client: DATABASE_CLIENT,
   connection: DATABASE_ROOT_CONNECTION,
 });

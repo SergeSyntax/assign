@@ -8,18 +8,13 @@ import {
 } from '../test-graphql-utils';
 import { registration } from 'src/auth/users.service';
 import { User } from '@/common/types';
+import { createUserData } from 'test/mock/users';
 
 const BAD_USER_INPUT = 'BAD_USER_INPUT';
 
-const user = {
-  email: 'test@test.com',
-  password: 'password',
-  name: 'test',
-};
-
 const query = gql`
-  mutation Mutation($data: CreateUserData!) {
-    registration(data: $data) {
+  mutation Mutation($createUserData: CreateUserData!) {
+    registration(createUserData: $createUserData) {
       id
       name
       email
@@ -39,7 +34,7 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            data: _.omit(user, 'password'),
+            createUserData: _.omit(createUserData, 'password'),
           },
         });
 
@@ -50,7 +45,7 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            data: _.omit(user, 'email'),
+            createUserData: _.omit(createUserData, 'email'),
           },
         });
 
@@ -61,12 +56,12 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            data: _.omit(user, 'name'),
+            createUserData: _.omit(createUserData, 'name'),
           },
         });
 
         expect(getRegistrationRes(res)).toEqual(
-          expect.objectContaining({ email: user.email, name: 'unknown' }),
+          expect.objectContaining({ email: createUserData.email, name: 'unknown' }),
         );
         expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
         expect(getCookie(res)).toMatch(/^session=.+/);
@@ -76,24 +71,24 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            data: user,
+            createUserData: createUserData,
           },
         });
 
         expect(getRegistrationRes(res)).toEqual(
-          expect.objectContaining({ email: user.email, name: user.name }),
+          expect.objectContaining({ email: createUserData.email, name: createUserData.name }),
         );
         expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
         expect(getCookie(res)).toMatch(/^session=.+/);
       });
 
       it('should return a user', async () => {
-        await registration(user);
+        await registration(createUserData);
 
         const res = await graphqlRequest({
           query,
           variables: {
-            data: user,
+            createUserData: createUserData,
           },
         });
         const { extensions, message } = getApolloResponseError(res);

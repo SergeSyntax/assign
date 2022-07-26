@@ -1,5 +1,5 @@
 import { UserInputError } from 'apollo-server-core';
-import { CreateUserData, ResolversTypes } from '@/common/types/generated/graphql';
+import { CreateUserData, ResolversTypes } from '@/common/types';
 import { hash, signJWT } from './auth.utils';
 import { usersRepository } from './users.repository';
 

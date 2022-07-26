@@ -20,7 +20,7 @@ export const usersSchemas = gql`
   }
 
   type Mutation {
-    registration(data: CreateUserData!): User!
+    registration(createUserData: CreateUserData!): User!
   }
 
   type Query {

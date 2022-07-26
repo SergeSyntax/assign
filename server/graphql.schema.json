@@ -93,7 +93,7 @@
             "description": null,
             "args": [
               {
-                "name": "data",
+                "name": "createUserData",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
