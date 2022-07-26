@@ -12,7 +12,7 @@
     "test": "jest --config ./test/jest.config.ts --watch --no-cache ",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest --runInBand  --no-cache --config ./test/jest.config.ts --watch",
     "test:e2e": "jest --config ./test/jest-e2e.config.ts --runInBand --no-cache",
-    "test:cov": "jest --coverage --config ./test/jest-e2e.config.ts",
+    "test:cov": "jest --coverage  --config ./test/jest.config.ts",
     "codegen": "graphql-codegen --config codegen.yml",
     "db:init": "ts-node database/cli/create",
     "db:drop": "ts-node database/cli/drop",

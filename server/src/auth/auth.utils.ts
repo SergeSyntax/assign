@@ -29,15 +29,17 @@ export const hash = (password: string): Promise<string> =>
 
     crypto.scrypt(password, salt, 64, (err, derivedKey) => {
       if (err) return reject(err);
-      return resolve(JSON.stringify(`${salt}:${derivedKey}`));
+      const key = derivedKey.toString('hex');
+      return resolve(`${salt}:${key}`);
     });
   });
 
-export const verify = async (password: string, hash: string) =>
+export const compare = async (storedPassword: string, suppliedPassword: string) =>
   new Promise((resolve, reject) => {
-    const [salt, key] = hash.split(':');
-    crypto.scrypt(password, salt, 64, (err, derivedKey) => {
+    const [hashedPassword, salt] = storedPassword.split(':');
+
+    crypto.scrypt(suppliedPassword, salt, 64, (err, derivedKey) => {
       if (err) reject(err);
-      resolve(key == JSON.parse(derivedKey.toString('hex')));
+      resolve(derivedKey.toString('hex') === hashedPassword);
     });
   });

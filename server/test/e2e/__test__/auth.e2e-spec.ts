@@ -82,7 +82,7 @@ describe('auth', () => {
         expect(getCookie(res)).toMatch(/^session=.+/);
       });
 
-      it('should return a user', async () => {
+      it('should throw email validation error if email already registered', async () => {
         await registration(createUserData);
 
         const res = await graphqlRequest({
