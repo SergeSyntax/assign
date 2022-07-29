@@ -7,7 +7,8 @@ import { CacheProvider, EmotionCache, Global } from '@emotion/react';
 // import { ApolloProvider } from '@apollo/client';
 import { theme, global } from '../styles';
 import { AlertContextProvider } from '../src';
-import { createEmotionCache } from '../config';
+import { createEmotionCache, useApollo } from '../config';
+import { ApolloProvider } from '@apollo/client';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -30,7 +31,7 @@ export default function MyApp(props: MyAppProps) {
     }
   }, []);
 
-  // const apolloClient = useApollo(pageProps);
+  const apolloClient = useApollo(pageProps);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -41,11 +42,11 @@ export default function MyApp(props: MyAppProps) {
         {/*CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Global styles={global} />
-        {/* <ApolloProvider client={apolloClient}> */}
+        <ApolloProvider client={apolloClient}>
         <AlertContextProvider>
           <Component {...pageProps} />
         </AlertContextProvider>
-        {/* </ApolloProvider> */}
+        </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>
   );

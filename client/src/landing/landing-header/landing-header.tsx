@@ -26,10 +26,10 @@ export const LandingHeader: React.FC = () => {
         <LandingHeaderTitleSub>to the right direction</LandingHeaderTitleSub>
       </LandingHeaderTitleWrapper>
       <LandingHeaderActions>
-        <Link passHref href="/registration">
+        <Link passHref href="/auth/registration">
           <LandingHeaderButtonPrimary variant="contained">join now</LandingHeaderButtonPrimary>
         </Link>
-        <Link passHref href="/login">
+        <Link passHref href="/auth/login">
           <LandingHeaderButtonSecondary variant="outlined">sign in</LandingHeaderButtonSecondary>
         </Link>
       </LandingHeaderActions>

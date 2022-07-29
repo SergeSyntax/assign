@@ -52,7 +52,7 @@ exports[`renders homepage unchanged 1`] = `
     >
       <a
         class="MuiButton-root MuiButton-contained MuiButton-containedInherit MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorInherit MuiButtonBase-root css-1aub1mo-MuiButtonBase-root-MuiButton-root"
-        href="/registration"
+        href="/auth/registration"
         tabindex="0"
       >
         join now
@@ -62,7 +62,7 @@ exports[`renders homepage unchanged 1`] = `
       </a>
       <a
         class="MuiButton-root MuiButton-outlined MuiButton-outlinedInherit MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorInherit MuiButtonBase-root css-1g6yw9l-MuiButtonBase-root-MuiButton-root"
-        href="/login"
+        href="/auth/login"
         tabindex="0"
       >
         sign in

@@ -22,3 +22,8 @@ export const LabelWrapper = styled('label')`
   padding: 0.5rem;
   color: #172b4d;
 `;
+
+export const SmallLabelWrapper = styled(LabelWrapper)`
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
