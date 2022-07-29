@@ -8,6 +8,7 @@ import {
   RegistrationHeader,
   RegistrationLinks
 } from "src/auth/registration";
+import { RegistrationForm } from "src/auth/registration-form";
 
 const RegistrationPage: NextPage = () => {
   return (
@@ -17,6 +18,7 @@ const RegistrationPage: NextPage = () => {
         <RegistrationHeader />
         <RegistrationContainer>
           <OpenAuth />
+          <RegistrationForm />
           <RegistrationLinks />
         </RegistrationContainer>
         <RegistrationSignature />

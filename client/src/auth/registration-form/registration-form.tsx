@@ -1,3 +1,25 @@
+
+        import React from 'react';
+        import { useMutation } from '@apollo/client';
+        import { REGISTRATION_GQL } from './registration-form.gql'
+        
+        interface RegistrationFormProps {}
+        
+        export const RegistrationForm:React.FC<RegistrationFormProps> = () => {
+          const [register, { loading }] = useMutation(REGISTRATION_GQL)
+          return (
+            <div><button onClick={async () => {
+              await register({ variables: {
+                createUserData: {
+                  email: 'tdest@test.com',
+                  password: 'tedst',
+                  name: 'test'
+                }
+              } })
+            }}>test</button></div>
+          );
+        };
+        
 /*
 
       <form onSubmit={handleSubmit(handleFormSubmit)} noValidate autoComplete="off">
