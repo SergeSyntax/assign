@@ -1,8 +1,30 @@
+
+
+  #   plugins:
+  #     - typescript
+  #     - typescript-operations
+  #     # - typed-document-node
+  #     - typescript-react-apollo
+
 schema: http://localhost:4000/graphql
 documents: './**/*.ts'
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+    - tslint --fix
+config:
+  inputMaybeValue: T | undefined
+  maybeValue: T | undefined
 generates:
-  ./src/generated.ts:
+  ./types.ts:
     plugins:
       - typescript
+      - typescript-apollo-client-helpers
+  ./:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.tsx
+      baseTypesPath: types.ts
+    plugins:
       - typescript-operations
-      - typed-document-node
+      - typescript-react-apollo
