@@ -6,7 +6,7 @@ import {
   RegistrationSignature,
   RegistrationWrapper,
   RegistrationHeader,
-  RegistrationLinks
+  RegistrationLinks,
 } from "src/auth/registration";
 import { RegistrationForm } from "src/auth/registration-form";
 

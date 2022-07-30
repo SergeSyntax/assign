@@ -7,20 +7,21 @@
   #     - typescript-react-apollo
 
 schema: http://localhost:4000/graphql
-documents: './**/*.ts'
+documents: 'src/**/*.graphql'
 hooks:
   afterAllFileWrite:
     - prettier --write
     - tslint --fix
 config:
+  # preResolveTypes: false
   inputMaybeValue: T | undefined
   maybeValue: T | undefined
 generates:
-  ./types.ts:
+  src/common/apollo/types.ts:
     plugins:
       - typescript
       - typescript-apollo-client-helpers
-  ./:
+  src/:
     preset: near-operation-file
     presetConfig:
       extension: .generated.tsx
@@ -28,3 +29,6 @@ generates:
     plugins:
       - typescript-operations
       - typescript-react-apollo
+  src/common/apollo/graphql.schema.json:
+    plugins:
+      - 'introspection'

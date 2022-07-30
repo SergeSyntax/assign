@@ -1,20 +1,14 @@
-import * as Types from "../../../types";
+import * as Types from '../../types';
 
-import { gql } from "@apollo/client";
-import * as Apollo from "@apollo/client";
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type RegistrationMutationVariables = Types.Exact<{
   createUserData: Types.CreateUserData;
 }>;
 
-export type RegistrationMutation = {
-  __typename?: "Mutation";
-  registration: {
-    __typename?: "User";
-    id: string;
-    name: string;
-    email: string;
-  };
+export type RegistrationMutation = { __typename?: 'Mutation' } & {
+  registration: { __typename?: 'User' } & Pick<Types.User, 'id' | 'name' | 'email'>;
 };
 
 export const RegistrationDocument = gql`
@@ -26,10 +20,7 @@ export const RegistrationDocument = gql`
     }
   }
 `;
-export type RegistrationMutationFn = Apollo.MutationFunction<
-  RegistrationMutation,
-  RegistrationMutationVariables
->;
+export type RegistrationMutationFn = Apollo.MutationFunction<RegistrationMutation, RegistrationMutationVariables>;
 
 /**
  * __useRegistrationMutation__
@@ -49,22 +40,13 @@ export type RegistrationMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useRegistrationMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    RegistrationMutation,
-    RegistrationMutationVariables
-  >
+  baseOptions?: Apollo.MutationHookOptions<RegistrationMutation, RegistrationMutationVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    RegistrationMutation,
-    RegistrationMutationVariables
-  >(RegistrationDocument, options);
+  return Apollo.useMutation<RegistrationMutation, RegistrationMutationVariables>(RegistrationDocument, options);
 }
-export type RegistrationMutationHookResult = ReturnType<
-  typeof useRegistrationMutation
->;
-export type RegistrationMutationResult =
-  Apollo.MutationResult<RegistrationMutation>;
+export type RegistrationMutationHookResult = ReturnType<typeof useRegistrationMutation>;
+export type RegistrationMutationResult = Apollo.MutationResult<RegistrationMutation>;
 export type RegistrationMutationOptions = Apollo.BaseMutationOptions<
   RegistrationMutation,
   RegistrationMutationVariables

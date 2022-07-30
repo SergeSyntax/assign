@@ -1,0 +1,2 @@
+schema: 'src/common/apollo/graphql.schema.json'
+documents: 'src/**/*.{graphql,js,ts,jsx,tsx}'

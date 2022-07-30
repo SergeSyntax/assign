@@ -1,23 +1,12 @@
 
         import React from 'react';
-        import { useMutation } from '@apollo/client';
-        import { REGISTRATION_GQL } from './registration-form.gql'
-import { useRegistrationMutation } from './registration-form.gql.generated';
+
         
-        interface RegistrationFormProps {}
         
-        export const RegistrationForm:React.FC<RegistrationFormProps> = () => {
+        export const RegistrationForm:React.FC = () => {
           // const [register, { loading }] = useMutation(REGISTRATION_GQL)
-          const [register, {loading}] = useRegistrationMutation()
           return (
             <div><button onClick={async () => {
-              await register({ variables: {
-                createUserData: {
-                  email: 'tdest@test.com',
-                  password: 'tedst',
-                  name: 'test'
-                }
-              } })
             }}>test</button></div>
           );
         };
