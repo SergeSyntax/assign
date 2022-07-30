@@ -1,9 +1,9 @@
 import passport from 'passport';
 import { User } from 'src/auth';
-import { signJWT } from 'src/auth/auth.utils';
+import { sign } from 'src/auth/auth.utils';
 
 passport.serializeUser((user, done) => {
-  const token = signJWT(user as User);
+  const token = sign(user as User);
   done(null, token);
 });
 

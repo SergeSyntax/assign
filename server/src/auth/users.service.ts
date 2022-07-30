@@ -1,6 +1,6 @@
 import { UserInputError } from 'apollo-server-core';
 import { CreateUserData, ResolversTypes } from '@/common/types';
-import { hash, signJWT } from './auth.utils';
+import { hash, sign } from './auth.utils';
 import { usersRepository } from './users.repository';
 
 interface RegisterResolve {
@@ -21,6 +21,6 @@ export const registration = async ({
 
   return {
     user,
-    token: signJWT(user),
+    token: sign(user),
   };
 };

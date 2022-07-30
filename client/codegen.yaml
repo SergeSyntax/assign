@@ -6,7 +6,6 @@ hooks:
     - prettier --write
     - tslint --fix
 config:
-  # preResolveTypes: false
   inputMaybeValue: T | undefined
   maybeValue: T | undefined
 generates:
