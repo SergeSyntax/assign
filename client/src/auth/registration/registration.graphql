@@ -1,0 +1,7 @@
+mutation Registration($createUserData: CreateUserData!) {
+  registration(createUserData: $createUserData) {
+    id
+    name
+    email
+  }
+}

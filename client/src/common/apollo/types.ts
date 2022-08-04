@@ -27,6 +27,7 @@ export type Mutation = {
   registration: User;
 };
 
+
 export type MutationRegistrationArgs = {
   createUserData: CreateUserData;
 };
@@ -39,7 +40,7 @@ export type Query = {
 export enum Role {
   Admin = 'ADMIN',
   Member = 'MEMBER',
-  Moderator = 'MODERATOR',
+  Moderator = 'MODERATOR'
 }
 
 export type User = {
@@ -51,30 +52,30 @@ export type User = {
 
 export type MutationKeySpecifier = ('registration' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
-  registration?: FieldPolicy<any> | FieldReadFunction<any>;
+	registration?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type QueryKeySpecifier = ('profile' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
-  profile?: FieldPolicy<any> | FieldReadFunction<any>;
+	profile?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type UserKeySpecifier = ('email' | 'id' | 'name' | UserKeySpecifier)[];
 export type UserFieldPolicy = {
-  email?: FieldPolicy<any> | FieldReadFunction<any>;
-  id?: FieldPolicy<any> | FieldReadFunction<any>;
-  name?: FieldPolicy<any> | FieldReadFunction<any>;
+	email?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type StrictTypedTypePolicies = {
-  Mutation?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier);
-    fields?: MutationFieldPolicy;
-  };
-  Query?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier);
-    fields?: QueryFieldPolicy;
-  };
-  User?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?: false | UserKeySpecifier | (() => undefined | UserKeySpecifier);
-    fields?: UserFieldPolicy;
-  };
+	Mutation?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier),
+		fields?: MutationFieldPolicy,
+	},
+	Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier),
+		fields?: QueryFieldPolicy,
+	},
+	User?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | UserKeySpecifier | (() => undefined | UserKeySpecifier),
+		fields?: UserFieldPolicy,
+	}
 };
 export type TypedTypePolicies = StrictTypedTypePolicies & TypePolicies;

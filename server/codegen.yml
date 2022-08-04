@@ -10,6 +10,10 @@ generates:
     plugins:
       - 'typescript'
       - 'typescript-resolvers'
+    hooks:
+      afterAllFileWrite:
+        - eslint --fix
+        - prettier --write
   ./graphql.schema.json:
     plugins:
       - 'introspection'
