@@ -1,5 +1,5 @@
 import React, { Dispatch, useContext, useEffect, useReducer } from 'react';
-import { Action, AlertActionType, AlertDisplayPayload, AlertState } from './alert.types';
+import { Action, AlertActionType, AlertDisplayPayload, AlertState } from './alert.type';
 
 const ALERT_TIMEOUT = 4000;
 
