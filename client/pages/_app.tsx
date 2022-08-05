@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache, Global } from '@emotion/react';
 // import { ApolloProvider } from '@apollo/client';
 import { theme, global } from '../styles';
-import { AlertContextProvider } from '../src';
+import { AlertProvider } from '../src/alert';
 import { createEmotionCache, useApollo } from '../config';
 import { ApolloProvider } from '@apollo/client';
 
@@ -43,9 +43,9 @@ export default function MyApp(props: MyAppProps) {
         <CssBaseline />
         <Global styles={global} />
         <ApolloProvider client={apolloClient}>
-        <AlertContextProvider>
-          <Component {...pageProps} />
-        </AlertContextProvider>
+          <AlertProvider>
+            <Component {...pageProps} />
+          </AlertProvider>
         </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>

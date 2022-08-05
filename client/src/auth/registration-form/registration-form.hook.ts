@@ -1,10 +1,10 @@
+import { handleApolloError, useAlertProduce } from 'src/alert';
 import { useRegistrationMutation } from './registration-form.gql';
 
 export const useRegistration = () => {
+  const { display } = useAlertProduce();
   const [register, { loading }] = useRegistrationMutation({
-    onError(err) {
-      console.log(JSON.stringify(err, null, 2));
-    },
+    onError: handleApolloError(display),
   });
 
   return { register, loading };

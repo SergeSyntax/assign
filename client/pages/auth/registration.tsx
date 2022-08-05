@@ -1,14 +1,14 @@
-import { NextPage } from "next";
-import { SEO } from "src";
-import { OpenAuth } from "src/auth/open-auth";
+import { NextPage } from 'next';
+import { SEO } from 'src';
+import { OpenAuth } from 'src/auth/open-auth';
 import {
   RegistrationContainer,
   RegistrationSignature,
   RegistrationWrapper,
   RegistrationHeader,
   RegistrationLinks,
-} from "src/auth/registration";
-import { RegistrationForm } from "src/auth/registration-form";
+} from 'src/auth/registration-layout';
+import { RegistrationForm } from 'src/auth/registration-form';
 
 const RegistrationPage: NextPage = () => {
   return (

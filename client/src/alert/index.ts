@@ -1,3 +1,3 @@
-export * from './alert-context-provider';
-export * from './alert-context';
-export * from './alert-actions';
+export * from './alert';
+export { useAlertProduce } from './alert.hook';
+export { handleApolloError } from './alert.utils';

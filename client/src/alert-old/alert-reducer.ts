@@ -1,5 +1,11 @@
 import { AlertAction, AlertActionType, AlertState } from './alert.types';
 
+interface AlertState {
+  stale: boolean;
+  error: boolean;
+  message: string;
+}
+
 const BLANK_MESSAGE = '';
 
 export const alertReducer = (state: AlertState, action: AlertAction): AlertState => {

@@ -29,10 +29,6 @@ export const ContainedButton = styled(Button)`
       box-shadow: ${theme.shadows[5]};
       background: #0073b1;
     }
-
-    &:disabled {
-      background: #0073b1;
-    }
   `}
 `;
 

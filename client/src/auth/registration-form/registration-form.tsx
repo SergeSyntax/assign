@@ -25,7 +25,11 @@ interface RegistrationValues {
 
 export const RegistrationForm: React.FC = () => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
-  const { control, handleSubmit } = useForm<RegistrationValues>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<RegistrationValues>({
     resolver: yupResolver(registrationSchema),
     mode: 'all',
   });
@@ -39,7 +43,7 @@ export const RegistrationForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form noValidate onSubmit={handleSubmit(handleFormSubmit)}>
       <Controller
         name="name"
         {...commonAttributes}
@@ -107,7 +111,7 @@ export const RegistrationForm: React.FC = () => {
           );
         }}
       />
-      <SubmitButton fullWidth text="Agree 	&amp; Join" inProgress={loading} />
+      <SubmitButton disabled={!isValid} fullWidth text="Agree &amp; Join" inProgress={loading} />
     </form>
   );
 };
