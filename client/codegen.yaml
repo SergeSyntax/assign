@@ -16,8 +16,8 @@ generates:
   src/:
     preset: near-operation-file
     presetConfig:
-      extension: .generated.tsx
-      baseTypesPath: src/common/apollo/types.ts
+      extension: .gql.tsx
+      baseTypesPath: common/apollo/types.ts
     plugins:
       - typescript-operations
       - typescript-react-apollo
