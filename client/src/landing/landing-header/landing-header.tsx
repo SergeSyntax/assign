@@ -10,7 +10,7 @@ import {
   LandingHeaderTitleWrapper,
   LandingHeaderWrapper,
 } from './landing-header.styled';
-import { DownButton } from './down-button.style';
+import { DownButton } from './down-button.styled';
 
 export const LandingHeader: React.FC = () => {
   const handleDownButtonClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {

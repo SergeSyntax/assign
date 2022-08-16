@@ -1,13 +1,26 @@
 import React, { FC, ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
-import { ThemeProvider } from '@mui/material';
-import { theme } from '../styles';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { global, theme } from '../styles';
+import { Global } from '@emotion/react';
+import { AlertProvider } from 'src/alert';
+import { MockedProvider } from '@apollo/client/testing';
 
 /**
  * @link https://testing-library.com/docs/react-testing-library/setup/#configuring-jest-with-test-utils
  */
-const AllTheProviders: FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+const AllTheProviders: FC<{ children: React.ReactElement<any, string | React.JSXElementConstructor<any>> }> = ({
+  children,
+}) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Global styles={global} />
+      <MockedProvider mocks={[]}>
+        <AlertProvider>{children}</AlertProvider>
+      </MockedProvider>
+    </ThemeProvider>
+  );
 };
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>

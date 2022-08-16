@@ -3,8 +3,8 @@ import _ from 'lodash';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import MuiLink from '@mui/material/Link';
-import { LinkProps } from './link.type';
-import { Anchor } from './link.style';
+import { LinkProps } from './link.types';
+import { Anchor } from './link.styled';
 import { NextLink } from './next-link';
 
 // A styled version of the Next.js Link component:
@@ -20,7 +20,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link
     role, // Link don't have roles.
     ...other
   },
-  ref
+  ref,
 ) {
   const router = useRouter();
   const pathname = typeof href === 'string' ? href : href?.pathname;
