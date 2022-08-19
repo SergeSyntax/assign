@@ -1,9 +1,6 @@
-import React from "react";
-import { Link } from "src/common/link";
-import {
-  LoginLinkWrapper,
-  RegistrationCondition,
-} from "./registration-links.styled";
+import React from 'react';
+import { Link } from 'src/common/link';
+import { LoginLinkWrapper, RegistrationCondition } from './registration-links.styled';
 
 interface RegistrationLinksProps {}
 
@@ -12,13 +9,13 @@ export const RegistrationLinks: React.FC<RegistrationLinksProps> = () => {
     <>
       <RegistrationCondition>
         you agree to the
-        <Link href="/register">Privacy Policy</Link>
+        <Link href="#">Privacy Policy</Link>
         and
-        <Link href="/register">Terms of Use</Link>
+        <Link href="#">Terms of Use</Link>
       </RegistrationCondition>
       <LoginLinkWrapper>
         already on assign?
-        <Link href="/login">sign in</Link>
+        <Link href="/auth/login">sign in</Link>
       </LoginLinkWrapper>
     </>
   );

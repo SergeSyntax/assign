@@ -3,12 +3,12 @@ import { SEO } from 'src';
 import { OpenAuth } from 'src/auth/open-auth';
 import {
   RegistrationContainer,
-  RegistrationSignature,
-  RegistrationWrapper,
   RegistrationHeader,
   RegistrationLinks,
-} from 'src/auth/registration-layout';
-import { RegistrationForm } from 'src/auth/registration-form';
+  RegistrationSignature,
+  RegistrationWrapper,
+  RegistrationForm,
+} from 'src/auth/registration';
 
 const RegistrationPage: NextPage = () => {
   return (
