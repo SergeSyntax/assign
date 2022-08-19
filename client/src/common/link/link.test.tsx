@@ -1,11 +1,5 @@
-import { getRoles, render, screen } from 'test-utils';
+import { render, screen } from 'test-utils';
 import { Link } from './link';
-
-jest.mock('next/router', () => {
-  return {
-    useRouter: jest.fn(() => ({ pathname: '/' })),
-  };
-});
 
 describe('<Link />', () => {
   it('should render', () => {

@@ -1,6 +1,6 @@
+import userEvent from '@testing-library/user-event';
 import { renderController, screen } from 'test-utils';
 import { PasswordController } from './password-controller';
-import userEvent from '@testing-library/user-event';
 
 describe('<PasswordController>', () => {
   it('should render password input', () => {

@@ -1,12 +1,6 @@
 import { render, screen } from 'test-utils';
 import { RegistrationLinks } from './registration-links';
 
-jest.mock('next/router', () => {
-  return {
-    useRouter: jest.fn(() => ({ pathname: '/' })),
-  };
-});
-
 describe('<RegistrationLinks />', () => {
   it('should include privacy policy link', () => {
     render(<RegistrationLinks />);

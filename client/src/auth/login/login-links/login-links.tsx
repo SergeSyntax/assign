@@ -6,11 +6,11 @@ export const LoginLinks: React.FC = () => {
   return (
     <>
       <ForgotPasswordWrapper>
-        <Link href="/password-recovery">Forgot password?</Link>
+        <Link href="/auth/password-recovery">Forgot password?</Link>
       </ForgotPasswordWrapper>
       <RegisterLinkWrapper>
         New to Assign?
-        <Link href="/registration">Join Now</Link>
+        <Link href="/auth/registration">Join Now</Link>
       </RegisterLinkWrapper>
     </>
   );

@@ -14,13 +14,20 @@ export const RegistrationForm: React.FC = () => {
     control,
     handleSubmit,
     formState: { isValid },
+    setError,
   } = useForm<CreateUserData>({
     resolver: registrationResolver,
     mode: 'all',
   });
 
   const { loading, register } = useRegistration();
-  const handleFormSubmit: SubmitHandler<CreateUserData> = (data) => register({ variables: { createUserData: data } });
+  const handleFormSubmit: SubmitHandler<CreateUserData> = (data) =>
+    register({
+      variables: { createUserData: data },
+      onError: ({ message }) => {
+        if (/email address already in use/i.test(message)) setError('email', { message, type: 'validate' });
+      },
+    });
   const commonAttributes = { control, defaultValue: '' };
 
   return (
