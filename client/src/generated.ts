@@ -16,7 +16,7 @@ export type Scalars = {
   password_String_NotNull_minLength_1_maxLength_255: any;
 };
 
-export type CreateUserData = {
+export type RegistrationInput = {
   email: Scalars['email_String_NotNull_minLength_1_maxLength_255_format_email'];
   name?: InputMaybe<Scalars['name_String_minLength_1_maxLength_255']>;
   password: Scalars['password_String_NotNull_minLength_1_maxLength_255'];
@@ -27,9 +27,8 @@ export type Mutation = {
   registration: User;
 };
 
-
 export type MutationRegistrationArgs = {
-  createUserData: CreateUserData;
+  registrationInput: RegistrationInput;
 };
 
 export type Query = {
@@ -40,7 +39,7 @@ export type Query = {
 export enum Role {
   Admin = 'ADMIN',
   Member = 'MEMBER',
-  Moderator = 'MODERATOR'
+  Moderator = 'MODERATOR',
 }
 
 export type User = {
@@ -51,11 +50,55 @@ export type User = {
 };
 
 export type RegistrationMutationVariables = Exact<{
-  createUserData: CreateUserData;
+  registrationInput: RegistrationInput;
 }>;
 
+export type RegistrationMutation = {
+  __typename?: 'Mutation';
+  registration: { __typename?: 'User'; id: string; name: string; email: string };
+};
 
-export type RegistrationMutation = { __typename?: 'Mutation', registration: { __typename?: 'User', id: string, name: string, email: string } };
-
-
-export const RegistrationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Registration"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"createUserData"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateUserData"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createUserData"},"value":{"kind":"Variable","name":{"kind":"Name","value":"createUserData"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<RegistrationMutation, RegistrationMutationVariables>;
+export const RegistrationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'Registration' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'registrationInput' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'RegistrationInput' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'registration' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'registrationInput' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'registrationInput' } },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<RegistrationMutation, RegistrationMutationVariables>;

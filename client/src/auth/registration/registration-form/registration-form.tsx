@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { SubmitButton } from 'src/common/button/button';
 import { useRegistration } from './registration-form.hook';
 import { registrationResolver } from './registration-form.util';
-import { CreateUserData } from 'src/generated';
+import { RegistrationInput } from 'src/generated';
 import { PasswordController } from '../../password-controller';
 import { NameController } from './name-controller';
 import { EmailController } from '../../email-controller';
@@ -15,15 +15,15 @@ export const RegistrationForm: React.FC = () => {
     handleSubmit,
     formState: { isValid },
     setError,
-  } = useForm<CreateUserData>({
+  } = useForm<RegistrationInput>({
     resolver: registrationResolver,
     mode: 'all',
   });
 
   const { loading, register } = useRegistration();
-  const handleFormSubmit: SubmitHandler<CreateUserData> = (data) =>
+  const handleFormSubmit: SubmitHandler<RegistrationInput> = (data) =>
     register({
-      variables: { createUserData: data },
+      variables: { registrationInput: data },
       onError: ({ message }) => {
         if (/email address already in use/i.test(message)) setError('email', { message, type: 'validate' });
       },

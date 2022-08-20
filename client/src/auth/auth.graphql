@@ -1,0 +1,5 @@
+fragment UserIdentifiers on User {
+  id
+  name
+  email
+}

@@ -1,7 +1,5 @@
-mutation Registration($createUserData: CreateUserData!) {
-  registration(createUserData: $createUserData) {
-    id
-    name
-    email
+mutation Registration($registrationInput: RegistrationInput!) {
+  registration(registrationInput: $registrationInput) {
+    ...UserIdentifiers
   }
 }

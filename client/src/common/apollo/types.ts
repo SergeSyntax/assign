@@ -16,25 +16,36 @@ export type Scalars = {
   password_String_NotNull_minLength_1_maxLength_255: any;
 };
 
-export type CreateUserData = {
+export type LoginInput = {
   email: Scalars['email_String_NotNull_minLength_1_maxLength_255_format_email'];
-  name?: InputMaybe<Scalars['name_String_minLength_1_maxLength_255']>;
   password: Scalars['password_String_NotNull_minLength_1_maxLength_255'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  login: User;
   registration: User;
 };
 
 
+export type MutationLoginArgs = {
+  loginInput: LoginInput;
+};
+
+
 export type MutationRegistrationArgs = {
-  createUserData: CreateUserData;
+  registrationInput: RegistrationInput;
 };
 
 export type Query = {
   __typename?: 'Query';
   profile: User;
+};
+
+export type RegistrationInput = {
+  email: Scalars['email_String_NotNull_minLength_1_maxLength_255_format_email'];
+  name?: InputMaybe<Scalars['name_String_minLength_1_maxLength_255']>;
+  password: Scalars['password_String_NotNull_minLength_1_maxLength_255'];
 };
 
 export enum Role {
@@ -50,8 +61,9 @@ export type User = {
   name: Scalars['String'];
 };
 
-export type MutationKeySpecifier = ('registration' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('login' | 'registration' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
+	login?: FieldPolicy<any> | FieldReadFunction<any>,
 	registration?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type QueryKeySpecifier = ('profile' | QueryKeySpecifier)[];
