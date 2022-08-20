@@ -13,6 +13,11 @@ export const usersSchemas = gql`
     name: String @constraint(minLength: 1, maxLength: 255)
   }
 
+  input LoginData {
+    email: String! @constraint(minLength: 1, maxLength: 255, format: "email")
+    password: String! @constraint(minLength: 1, maxLength: 255)
+  }
+
   type User {
     id: ID!
     name: String!
@@ -21,6 +26,7 @@ export const usersSchemas = gql`
 
   type Mutation {
     registration(createUserData: CreateUserData!): User!
+    login(loginData: LoginData!): User!
   }
 
   type Query {

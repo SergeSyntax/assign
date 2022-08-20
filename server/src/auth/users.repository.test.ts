@@ -36,4 +36,13 @@ describe('class usersRepository', () => {
       );
     });
   });
+
+  describe('findOne(where: Partial<User>)', () => {
+    it('should structure the query correctly', () => {
+      const query = usersRepository.findOne({ email: 'test@test.com' }).toQuery();
+      expect(query).toMatchInlineSnapshot(
+        `"select * from \\"users\\" as \\"u\\" where \\"email\\" = 'test@test.com' limit 1"`,
+      );
+    });
+  });
 });

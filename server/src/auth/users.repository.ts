@@ -21,6 +21,11 @@ class UsersRepository extends Repository<User, CreateUserData> {
     const query = this.getBuilder().select('*').where({ email }).returning('email');
     return this.knex.first(this.knex.raw(`EXISTS (?)`, query));
   }
+
+  findOne(where: Partial<User>) {
+    const query = this.getBuilder().where(where).first();
+    return query;
+  }
 }
 
 export const usersRepository = new UsersRepository();

@@ -21,9 +21,20 @@ export type CreateUserData = {
   password: Scalars['String'];
 };
 
+export type LoginData = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  login: User;
   registration: User;
+};
+
+
+export type MutationLoginArgs = {
+  loginData: LoginData;
 };
 
 
@@ -123,6 +134,7 @@ export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateUserData: CreateUserData;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  LoginData: LoginData;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Role: Role;
@@ -135,6 +147,7 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
   CreateUserData: CreateUserData;
   ID: Scalars['ID'];
+  LoginData: LoginData;
   Mutation: {};
   Query: {};
   String: Scalars['String'];
@@ -142,6 +155,7 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  login?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'loginData'>>;
   registration?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegistrationArgs, 'createUserData'>>;
 }>;
 
