@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { UserInputError } from 'apollo-server-core';
-import { CreateUserData, LoginData, ResolversTypes } from '@/common/types';
+import { RegistrationInput, LoginInput, ResolversTypes } from '@/common/types';
 import { hash, sign, compare } from './auth.utils';
 import { usersRepository } from './users.repository';
 import { User } from './users.type';
@@ -14,7 +14,7 @@ export const registration = async ({
   email,
   password,
   name,
-}: CreateUserData): Promise<RegisterResolve> => {
+}: RegistrationInput): Promise<RegisterResolve> => {
   const { exists: isUserExists } = await usersRepository.isEmailRegistered(email);
   if (isUserExists) throw new UserInputError('the email address already in use');
 
@@ -27,7 +27,7 @@ export const registration = async ({
   };
 };
 
-export const login = async ({ email, password }: LoginData): Promise<RegisterResolve> => {
+export const login = async ({ email, password }: LoginInput): Promise<RegisterResolve> => {
   const user: User = await usersRepository.findOne({ email });
 
   if (!user) throw new UserInputError('invalid credentials');

@@ -15,13 +15,7 @@ export type Scalars = {
   Float: number;
 };
 
-export type CreateUserData = {
-  email: Scalars['String'];
-  name?: InputMaybe<Scalars['String']>;
-  password: Scalars['String'];
-};
-
-export type LoginData = {
+export type LoginInput = {
   email: Scalars['String'];
   password: Scalars['String'];
 };
@@ -34,18 +28,24 @@ export type Mutation = {
 
 
 export type MutationLoginArgs = {
-  loginData: LoginData;
+  loginInput: LoginInput;
 };
 
 
 export type MutationRegistrationArgs = {
-  createUserData: CreateUserData;
+  registrationInput: RegistrationInput;
 };
 
 export type Query = {
   __typename?: 'Query';
   profile: User;
   test?: Maybe<Scalars['String']>;
+};
+
+export type RegistrationInput = {
+  email: Scalars['String'];
+  name?: InputMaybe<Scalars['String']>;
+  password: Scalars['String'];
 };
 
 export enum Role {
@@ -132,11 +132,11 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  CreateUserData: CreateUserData;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  LoginData: LoginData;
+  LoginInput: LoginInput;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  RegistrationInput: RegistrationInput;
   Role: Role;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
@@ -145,18 +145,18 @@ export type ResolversTypes = ResolversObject<{
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
-  CreateUserData: CreateUserData;
   ID: Scalars['ID'];
-  LoginData: LoginData;
+  LoginInput: LoginInput;
   Mutation: {};
   Query: {};
+  RegistrationInput: RegistrationInput;
   String: Scalars['String'];
   User: User;
 }>;
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  login?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'loginData'>>;
-  registration?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegistrationArgs, 'createUserData'>>;
+  login?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'loginInput'>>;
+  registration?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegistrationArgs, 'registrationInput'>>;
 }>;
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{

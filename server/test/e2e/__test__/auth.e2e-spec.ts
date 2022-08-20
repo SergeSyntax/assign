@@ -8,7 +8,7 @@ import {
 } from '../test-graphql-utils';
 import { registration } from 'src/auth/users.service';
 import { User } from '@/common/types';
-import { createUserData, loginData } from 'test/mock/users';
+import { registrationInput, loginInput } from 'test/mock/users';
 import { usersRepository } from 'src/auth/users.repository';
 import { hash } from 'src/auth/auth.utils';
 
@@ -19,10 +19,10 @@ const getAuthHeader = (res: ApolloResponse) => res.header.authorization;
 
 describe('auth', () => {
   describe('Mutation', () => {
-    describe('registration(data: CreateUserData!): User!', () => {
+    describe('registration(data: RegistrationInput!): User!', () => {
       const query = gql`
-        mutation Mutation($createUserData: CreateUserData!) {
-          registration(createUserData: $createUserData) {
+        mutation Mutation($registrationInput: RegistrationInput!) {
+          registration(registrationInput: $registrationInput) {
             id
             name
             email
@@ -36,7 +36,7 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            createUserData: _.omit(createUserData, 'password'),
+            registrationInput: _.omit(registrationInput, 'password'),
           },
         });
 
@@ -47,7 +47,7 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            createUserData: _.omit(createUserData, 'email'),
+            registrationInput: _.omit(registrationInput, 'email'),
           },
         });
 
@@ -58,12 +58,12 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            createUserData: _.omit(createUserData, 'name'),
+            registrationInput: _.omit(registrationInput, 'name'),
           },
         });
 
         expect(getRegistrationRes(res)).toEqual(
-          expect.objectContaining({ email: createUserData.email, name: 'unknown' }),
+          expect.objectContaining({ email: registrationInput.email, name: 'unknown' }),
         );
         expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
         expect(getCookie(res)).toMatch(/^session=.+/);
@@ -73,24 +73,24 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            createUserData: createUserData,
+            registrationInput: registrationInput,
           },
         });
 
         expect(getRegistrationRes(res)).toEqual(
-          expect.objectContaining({ email: createUserData.email, name: createUserData.name }),
+          expect.objectContaining({ email: registrationInput.email, name: registrationInput.name }),
         );
         expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
         expect(getCookie(res)).toMatch(/^session=.+/);
       });
 
       it('should throw email validation error if email already registered', async () => {
-        await registration(createUserData);
+        await registration(registrationInput);
 
         const res = await graphqlRequest({
           query,
           variables: {
-            createUserData: createUserData,
+            registrationInput: registrationInput,
           },
         });
         const { extensions, message } = getApolloResponseError(res);
@@ -99,10 +99,10 @@ describe('auth', () => {
       });
     });
 
-    describe('login(loginData: LoginData!): User!', () => {
+    describe('login(loginInput: LoginInput!): User!', () => {
       const query = gql`
-        mutation Login($loginData: LoginData!) {
-          login(loginData: $loginData) {
+        mutation Login($loginInput: LoginInput!) {
+          login(loginInput: $loginInput) {
             id
             name
             email
@@ -112,9 +112,9 @@ describe('auth', () => {
 
       const getLoginRes = (res: ApolloResponse) => getApolloResponseData<User>(res).login;
       const insertUser = async () => {
-        const password = await hash(createUserData.password);
+        const password = await hash(registrationInput.password);
         return usersRepository.create({
-          email: createUserData.email,
+          email: registrationInput.email,
           password,
         });
       };
@@ -123,7 +123,7 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            loginData: _.omit(loginData, 'password'),
+            loginInput: _.omit(loginInput, 'password'),
           },
         });
 
@@ -134,7 +134,7 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            loginData: _.omit(loginData, 'email'),
+            loginInput: _.omit(loginInput, 'email'),
           },
         });
 
@@ -145,7 +145,7 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            loginData: loginData,
+            loginInput: loginInput,
           },
         });
 
@@ -159,7 +159,7 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            loginData: { ...loginData, password: INCORRECT_PASSWORD },
+            loginInput: { ...loginInput, password: INCORRECT_PASSWORD },
           },
         });
 
@@ -171,10 +171,10 @@ describe('auth', () => {
         const res = await graphqlRequest({
           query,
           variables: {
-            loginData,
+            loginInput,
           },
         });
-        expect(getLoginRes(res)).toEqual(expect.objectContaining({ email: loginData.email }));
+        expect(getLoginRes(res)).toEqual(expect.objectContaining({ email: loginInput.email }));
         expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
         expect(getCookie(res)).toMatch(/^session=.+/);
       });

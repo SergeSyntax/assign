@@ -1,7 +1,7 @@
-import { CreateUserData } from '@/common/types/generated/graphql';
+import { RegistrationInput } from '@/common/types/generated/graphql';
 import { Validation } from '@/common/utils';
 
-export const createUserValidation = new Validation<CreateUserData>({
+export const createUserValidation = new Validation<RegistrationInput>({
   type: 'object',
   required: ['email', 'password'],
   additionalProperties: false,
@@ -26,7 +26,7 @@ export const createUserValidation = new Validation<CreateUserData>({
   },
 });
 
-// export const updateUserValidation = new Validation<Partial<CreateUserData>>({
+// export const updateUserValidation = new Validation<Partial<RegistrationInput>>({
 //   type: 'object',
 //   additionalProperties: false,
 //   properties: {

@@ -1,6 +1,6 @@
 import { usersRepository } from './users.repository';
 import { createUserValidation } from './users.model';
-import { createUserData } from 'test/mock/users';
+import { registrationInput } from 'test/mock/users';
 
 jest.mock('./users.model', () => {
   return {
@@ -11,9 +11,9 @@ jest.mock('./users.model', () => {
 });
 
 describe('class usersRepository', () => {
-  describe('create(data: CreateUserData)', () => {
+  describe('create(data: RegistrationInput)', () => {
     it('should structure the query correctly', () => {
-      const query = usersRepository.create(createUserData).toQuery();
+      const query = usersRepository.create(registrationInput).toQuery();
 
       expect(query).toMatchInlineSnapshot(
         `"insert into \\"users\\" as \\"u\\" (\\"email\\", \\"name\\", \\"password\\") values ('test@test.com', 'test', 'test') returning \\"id\\", \\"name\\", \\"email\\", \\"createdAt\\", \\"updatedAt\\""`,
@@ -21,9 +21,9 @@ describe('class usersRepository', () => {
     });
 
     it('should run validation on create', () => {
-      usersRepository.create(createUserData);
+      usersRepository.create(registrationInput);
 
-      expect(createUserValidation.validate).toBeCalledWith(createUserData);
+      expect(createUserValidation.validate).toBeCalledWith(registrationInput);
     });
   });
 

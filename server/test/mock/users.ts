@@ -1,11 +1,11 @@
-import { CreateUserData, LoginData } from '@/common/types';
+import { RegistrationInput, LoginInput } from '@/common/types';
 
-export const loginData: LoginData = {
+export const loginInput: LoginInput = {
   email: 'test@test.com',
   password: 'test',
 };
 
-export const createUserData: CreateUserData = {
-  ...loginData,
+export const registrationInput: RegistrationInput = {
+  ...loginInput,
   name: 'test',
 };

@@ -10,13 +10,13 @@ const setAuthToken = (context: ApolloContext, token: string) => {
 
 export const usersResolvers: Resolvers = {
   Mutation: {
-    registration: async (_parent, { createUserData }, context, _info) => {
-      const { user, token } = await usersService.registration(createUserData);
+    registration: async (_parent, { registrationInput }, context, _info) => {
+      const { user, token } = await usersService.registration(registrationInput);
       setAuthToken(context, token);
       return user;
     },
-    login: async (_parent, { loginData }, context, _info) => {
-      const { user, token } = await usersService.login(loginData);
+    login: async (_parent, { loginInput }, context, _info) => {
+      const { user, token } = await usersService.login(loginInput);
       setAuthToken(context, token);
       return user;
     },

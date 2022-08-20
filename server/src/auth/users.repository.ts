@@ -1,9 +1,9 @@
-import { CreateUserData } from '@/common/types';
+import { RegistrationInput } from '@/common/types';
 import { Repository } from '@/common/utils';
 import { createUserValidation } from './users.model';
 import { User } from './users.type';
 
-class UsersRepository extends Repository<User, CreateUserData> {
+class UsersRepository extends Repository<User, RegistrationInput> {
   constructor() {
     super({
       tableName: 'users',
@@ -12,7 +12,7 @@ class UsersRepository extends Repository<User, CreateUserData> {
     });
   }
 
-  create(data: CreateUserData) {
+  create(data: RegistrationInput) {
     this.createValidation?.validate(data);
     return this.getBuilder().insert(data, this.returnedColum);
   }

@@ -12,12 +12,12 @@ import { isEnv, Env } from '@/common/config/environment';
 const email = faker.internet.email();
 const password = faker.music.songName();
 const landingPageDefaultVariables = {
-  createUserData: {
+  registrationInput: {
     email,
     password,
     name: faker.name.firstName(),
   },
-  loginData: {
+  loginInput: {
     email,
     password,
   },
