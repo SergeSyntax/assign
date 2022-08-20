@@ -9,11 +9,17 @@ import {
 import { faker } from '@faker-js/faker';
 import { isEnv, Env } from '@/common/config/environment';
 
+const email = faker.internet.email();
+const password = faker.music.songName();
 const landingPageDefaultVariables = {
   createUserData: {
-    email: faker.internet.email(),
-    password: faker.music.songName(),
+    email,
+    password,
     name: faker.name.firstName(),
+  },
+  loginData: {
+    email,
+    password,
   },
 };
 

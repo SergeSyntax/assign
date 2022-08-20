@@ -9,15 +9,15 @@ import {
 import { getPlugins } from './plugins';
 import { getSchema } from './schema';
 import { corsOptions } from '@/common/config/constants';
+import { Env, isEnv } from '@/common/config';
 
 export const formatError = (err: GraphQLError): GraphQLFormattedError => {
   // Don't give the specific errors to the client.
-  if (err.message.startsWith('Database Error: ')) {
-    // TODO: check with unapplied migration
+  if (err.message.startsWith('connect ECONNREFUSED')) {
     return new Error('Internal server error');
   }
 
-  if (err.originalError instanceof UserInputError) {
+  if (isEnv(Env.Production) && err.originalError instanceof UserInputError) {
     delete err.extensions.exception;
   }
   // Otherwise return the original error. The error can also
