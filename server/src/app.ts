@@ -5,8 +5,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import { isEnv, PORT, cookieSessionOptions, corsOptions, Env } from './common/config';
-import { Logger, passport } from '@/common/utils';
+import { Logger } from '@/common/utils';
 import { Apollo } from './common/utils/apollo';
+import { passport } from './auth';
 
 export class App {
   public app: Express;

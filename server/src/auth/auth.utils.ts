@@ -5,7 +5,7 @@ import { Role } from '@/common/types';
 import { User } from './users.type';
 import { SECRET } from '@/common/config';
 
-interface JWTPayload {
+export interface JWTPayload {
   sub: string;
   aud: Role;
   iat: Date;

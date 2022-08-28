@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import { UserInputError } from 'apollo-server-core';
 import { RegistrationInput, LoginInput, ResolversTypes } from '@/common/types';
-import { hash, sign, compare } from './auth.utils';
+import { hash, sign, compare, JWTPayload, verify } from './auth.utils';
 import { usersRepository } from './users.repository';
 import { User } from './users.type';
+import { Logger } from '@/common/utils';
 
 interface RegisterResolve {
   token: string;
@@ -39,4 +40,18 @@ export const login = async ({ email, password }: LoginInput): Promise<RegisterRe
     user: _.pick(user, ['id', 'name', 'email']),
     token: sign(user),
   };
+};
+
+export const getUserFromJWT = async (jwt: string): Promise<User | undefined> => {
+  try {
+    const decoded = await verify(jwt);
+    const user: User = await usersRepository.findOne({ id: decoded.sub });
+
+    if (!user) return;
+    if (new Date(decoded?.iat)?.getTime() <= user.updatedAt.getTime() - 1000) return;
+
+    return user;
+  } catch (error) {
+    Logger.debug(error);
+  }
 };
