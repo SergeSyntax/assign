@@ -1,92 +1,20 @@
 import { useMemo } from 'react';
-import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject, from } from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
-import { offsetLimitPagination } from '@apollo/client/utilities';
+import { ApolloClient, NormalizedCacheObject, from } from '@apollo/client';
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
-import { BASE_URL } from '..';
+import { cache } from '..';
+import { getLinks } from './links';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 type Client = ApolloClient<NormalizedCacheObject>;
 
 let apolloClient: Client;
 
-const httpLink = new HttpLink({
-  uri: `${BASE_URL}/graphql`, // Server URL (must be absolute)
-  credentials: 'include',
-
-  // credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-});
-
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path }) => {
-      console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
-    });
-
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
-
-const { merge: offsetLimitPaginationMerge } = offsetLimitPagination();
-
-/**
- * @link https://www.apollographql.com/docs/react/caching/cache-configuration
- */
-const cache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {
-        fetchProjects: {
-          // Don't cache separate results based on
-          // any of this field's arguments.
-          keyArgs: ['args', ['filter', ['value']]],
-        },
-      },
-    },
-    ProjectsResponse: {
-      fields: {
-        projects: {
-          merge: offsetLimitPaginationMerge,
-          // read(existing, { variables, args }) {
-          //   console.log('args', args);
-
-          //   const offset = variables?.args?.offset;
-          //   const limit = variables?.args?.limit;
-
-          //   // A read function should always return undefined if existing is
-          //   // undefined. Returning undefined signals that the field is
-          //   // missing from the cache, which instructs Apollo Client to
-          //   // fetch its value from your GraphQL server.
-          //   return existing && existing.slice(offset, offset + limit);
-          // },
-        },
-        // {
-        //   merge(existing = [], incoming, { variables }) {
-        //     const offset = variables?.args?.offset;
-        //     console.log(offset);
-
-        //     // Slicing is necessary because the existing data is
-        //     // immutable, and frozen in development.
-        //     const merged = existing ? existing.slice() : [];
-        //     for (let i = 0; i < incoming.length; ++i) {
-        //       merged[offset + i] = incoming[i];
-        //     }
-        //     return merged;
-        //   },
-        // },
-      },
-      // merge: true,
-    },
-    // Section: {
-    //   // keyFields: ['id', 'projectId'],
-    // },
-  },
-});
-
 const createApolloClient = () =>
   new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: from([errorLink, httpLink]),
+    link: getLinks(),
+    connectToDevTools: process.env.NODE_ENV === 'development',
     cache,
   });
 
@@ -117,6 +45,13 @@ export function initializeApollo(initialState = null) {
   if (!apolloClient) apolloClient = _apolloClient;
 
   return _apolloClient;
+}
+
+/**
+ * @link https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.clearStore
+ */
+export function clearStore() {
+  return apolloClient?.clearStore();
 }
 
 export function addApolloState(client: Client, pageProps: any) {

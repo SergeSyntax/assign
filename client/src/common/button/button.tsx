@@ -7,10 +7,10 @@ interface SubmitButtonProps extends ButtonProps {
   text?: string;
 }
 
-export const SubmitButton: React.FC<SubmitButtonProps> = ({ inProgress, text, ...rest }) => {
+export const SubmitButton: React.FC<SubmitButtonProps> = ({ inProgress, text, disabled, ...rest }) => {
   return (
-    <ContainedButton type="submit" disabled={inProgress} {...rest}>
-      {inProgress ? <ProgressCircular size="2.4rem" /> : text}
+    <ContainedButton type="submit" disabled={inProgress || disabled} {...rest}>
+      {inProgress ? <ProgressCircular role="progressbar" size="2.4rem" /> : text}
     </ContainedButton>
   );
 };
