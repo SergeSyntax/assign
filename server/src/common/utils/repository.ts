@@ -47,7 +47,7 @@ export abstract class Repository<T = any, C = any> {
 
   constructor(public repositoryConfig: RepositoryConfig<T, C>) {}
 
-  getBuilder(): Knex.QueryBuilder<T> {
-    return this.knex<T>(this.table);
+  getBuilder() {
+    return this.knex(this.table);
   }
 }

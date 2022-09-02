@@ -4,6 +4,8 @@ import {
   ApolloResponse,
   getApolloResponseData,
   getApolloResponseError,
+  getApolloResponseErrorCode,
+  getApolloResponseErrors,
   graphqlRequest,
 } from '../test-graphql-utils';
 import { registration } from 'src/auth/users.service';
@@ -40,7 +42,7 @@ describe('auth', () => {
           },
         });
 
-        expect(getApolloResponseError(res).extensions.code).toBe(BAD_USER_INPUT);
+        expect(getApolloResponseErrorCode(res)).toBe(BAD_USER_INPUT);
       });
 
       it('should return error if email is missing', async () => {
@@ -51,7 +53,7 @@ describe('auth', () => {
           },
         });
 
-        expect(getApolloResponseError(res).extensions.code).toBe(BAD_USER_INPUT);
+        expect(getApolloResponseErrorCode(res)).toBe(BAD_USER_INPUT);
       });
 
       it('should return user if name is missing', async () => {
@@ -127,7 +129,8 @@ describe('auth', () => {
           },
         });
 
-        expect(getApolloResponseError(res).extensions.code).toBe(BAD_USER_INPUT);
+        expect(getApolloResponseData(res)).toBeNil();
+        expect(getApolloResponseErrorCode(res)).toBe(BAD_USER_INPUT);
       });
 
       it('should return error if email is missing', async () => {
@@ -138,7 +141,8 @@ describe('auth', () => {
           },
         });
 
-        expect(getApolloResponseError(res).extensions.code).toBe(BAD_USER_INPUT);
+        expect(getApolloResponseData(res)).toBeNil();
+        expect(getApolloResponseErrorCode(res)).toBe(BAD_USER_INPUT);
       });
 
       it("should throw an error if a user if that email doesn't exist", async () => {
@@ -149,7 +153,8 @@ describe('auth', () => {
           },
         });
 
-        expect(getApolloResponseError(res).extensions.code).toBe(BAD_USER_INPUT);
+        expect(getApolloResponseData(res)).toBeNil();
+        expect(getApolloResponseErrorCode(res)).toBe(BAD_USER_INPUT);
       });
 
       it("should throw an error if a user password didn't match", async () => {
@@ -163,7 +168,8 @@ describe('auth', () => {
           },
         });
 
-        expect(getApolloResponseError(res).extensions.code).toBe(BAD_USER_INPUT);
+        expect(getApolloResponseData(res)).toBeNil();
+        expect(getApolloResponseErrorCode(res)).toBe(BAD_USER_INPUT);
       });
 
       it("should throw an error if a user password didn't match", async () => {
@@ -175,6 +181,7 @@ describe('auth', () => {
           },
         });
         expect(getLoginRes(res)).toEqual(expect.objectContaining({ email: loginInput.email }));
+        expect(getApolloResponseErrors(res)).toBeNil();
         expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
         expect(getCookie(res)).toMatch(/^session=.+/);
       });

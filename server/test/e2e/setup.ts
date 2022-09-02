@@ -26,6 +26,18 @@ declare global {
 }
 
 beforeAll(async () => {
+  /**
+   * Apollo Server uses a multi-step request pipeline to validate and execute incoming GraphQL operations.
+   * This pipeline supports integration withcustom plugins at each step, which can affect an operation's
+   * execution. Because of this, it's important to perform integration tests with a variety of operations
+   * to ensure your request pipeline works as expected.
+   * There are two main options for integration testing with Apollo Server:
+   * > Using ApolloServer's executeOperation method.
+   * > Setting up an HTTP client to query your server.
+   *
+   * @note at this project we going to use Setting up an HTTP client to save time
+   * @link https://www.apollographql.com/docs/apollo-server/testing/testing
+   */
   const httpServer = await app.init();
   global.context = await Context.build(httpServer);
 });

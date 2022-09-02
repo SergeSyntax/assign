@@ -16,9 +16,18 @@ interface ApolloErrorResponse extends request.Response {
 export interface ApolloResponse extends request.Response {
   body: GraphQLResponse;
 }
+
+export const getApolloResponseErrors = (res: ApolloErrorResponse): ApolloError[] => {
+  return res.body.errors;
+};
+
 export const getApolloResponseError = (res: ApolloErrorResponse): ApolloError => {
-  const [error] = res.body.errors;
+  const [error] = getApolloResponseErrors(res);
   return error;
+};
+
+export const getApolloResponseErrorCode = (res: ApolloErrorResponse) => {
+  return getApolloResponseError(res)?.extensions?.code;
 };
 
 export const getApolloResponseData = <T>(res: ApolloResponse): Record<any, T> => {
