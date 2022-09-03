@@ -1,16 +1,15 @@
+import { IncomingHttpHeaders } from 'http';
 import { HttpLink, ApolloLink, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
 import { BASE_URL } from 'config/api';
 import fetch from 'cross-fetch';
 
-export const BASE_URL_APOLLO = `${BASE_URL}/graphql`;
+export interface CreateApolloHttpLink {
+  headers?: IncomingHttpHeaders;
+}
 
-const httpLink = new HttpLink({
-  uri: BASE_URL_APOLLO, // Server URL (must be absolute)
-  credentials: 'include', // Additional fetch() options like `credentials` or `headers`
-  fetch,
-});
+export const BASE_URL_APOLLO = `${BASE_URL}/graphql`;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -39,7 +38,14 @@ const retryLink = new RetryLink({
   attempts: { max: 5 },
 });
 
-export const getLinks = () => {
+export const generateLinks = ({ headers = {} }: CreateApolloHttpLink) => {
+  const httpLink = new HttpLink({
+    uri: BASE_URL_APOLLO, // Server URL (must be absolute)
+    credentials: 'include', // Additional fetch() options like `credentials` or `headers`
+    fetch,
+    headers,
+  });
+
   switch (process.env.NODE_ENV) {
     case 'test':
       return from([httpLink]);

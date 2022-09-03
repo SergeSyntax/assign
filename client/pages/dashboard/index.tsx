@@ -1,5 +1,8 @@
-import { NextPage } from 'next';
+import { addApolloState, initializeApollo } from 'config';
+import { GetServerSideProps, NextPage } from 'next';
 import { SEO } from 'src';
+import { CurrentUserDocument } from 'src/auth/auth.gql';
+import { getServerSideProps } from 'src/auth/auth.util';
 
 const DashboardPage: NextPage = () => {
   <SEO
@@ -8,5 +11,7 @@ const DashboardPage: NextPage = () => {
   />;
   return <div>Home</div>;
 };
+
+export { getServerSideProps };
 
 export default DashboardPage;

@@ -1,25 +1,29 @@
 import { useMemo } from 'react';
-import { ApolloClient, NormalizedCacheObject, from } from '@apollo/client';
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
 import { cache } from '..';
-import { getLinks } from './links';
+import { CreateApolloHttpLink, generateLinks } from './links';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 type Client = ApolloClient<NormalizedCacheObject>;
 
 let apolloClient: Client;
 
-const createApolloClient = () =>
+interface InitializeApolloArgs extends CreateApolloHttpLink {
+  initialState?: Partial<NormalizedCacheObject> | null;
+}
+
+const createApolloClient = (props: CreateApolloHttpLink) =>
   new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: getLinks(),
+    link: generateLinks(props),
     connectToDevTools: process.env.NODE_ENV === 'development',
     cache,
   });
 
-export function initializeApollo(initialState = null) {
-  const _apolloClient = apolloClient ?? createApolloClient();
+export function initializeApollo({ initialState, ...rest }: InitializeApolloArgs = { initialState: null }) {
+  const _apolloClient = apolloClient ?? createApolloClient(rest);
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -63,7 +67,7 @@ export function addApolloState(client: Client, pageProps: any) {
 }
 
 export function useApollo(pageProps: any) {
-  const state = pageProps[APOLLO_STATE_PROP_NAME];
-  const store = useMemo(() => initializeApollo(state), [state]);
+  const initialState = pageProps[APOLLO_STATE_PROP_NAME];
+  const store = useMemo(() => initializeApollo({ initialState }), [initialState]);
   return store;
 }

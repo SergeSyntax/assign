@@ -39,7 +39,7 @@ export type MutationRegistrationArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  profile: User;
+  currentUser: User;
 };
 
 export type RegistrationInput = {
@@ -50,8 +50,8 @@ export type RegistrationInput = {
 
 export enum Role {
   Admin = 'ADMIN',
-  Member = 'MEMBER',
-  Moderator = 'MODERATOR'
+  Reviewer = 'REVIEWER',
+  User = 'USER'
 }
 
 export type User = {
@@ -66,9 +66,9 @@ export type MutationFieldPolicy = {
 	login?: FieldPolicy<any> | FieldReadFunction<any>,
 	registration?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('profile' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('currentUser' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
-	profile?: FieldPolicy<any> | FieldReadFunction<any>
+	currentUser?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type UserKeySpecifier = ('email' | 'id' | 'name' | UserKeySpecifier)[];
 export type UserFieldPolicy = {

@@ -3,11 +3,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { SubmitButton } from 'src/common/button/button';
 import { useRegistration } from './registration-form.hook';
 import { registrationResolver } from './registration-form.util';
-import { RegistrationInput } from 'src/generated';
 import { PasswordController } from '../../password-controller';
 import { NameController } from './name-controller';
 import { EmailController } from '../../email-controller';
 import { formCommonProps } from 'src/common/react-hook-form';
+import { RegistrationInput } from 'src/common/apollo/types';
 
 export const RegistrationForm: React.FC = () => {
   const {

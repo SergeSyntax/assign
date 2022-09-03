@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { SEO } from 'src';
+import { useInitializeAuth } from 'src/auth/auth.hook';
 import { OpenAuth } from 'src/auth/open-auth';
 import {
   RegistrationContainer,
@@ -11,6 +12,8 @@ import {
 } from 'src/auth/registration';
 
 const RegistrationPage: NextPage = () => {
+  useInitializeAuth();
+
   return (
     <>
       <SEO title="Registration" description="create an account for Assign" />

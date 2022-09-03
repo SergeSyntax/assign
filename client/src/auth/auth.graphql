@@ -3,3 +3,11 @@ fragment UserIdentifiers on User {
   name
   email
 }
+
+query CurrentUser {
+  currentUser {
+    id
+    email
+    name
+  }
+}
