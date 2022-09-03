@@ -3,6 +3,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import { ApolloServer } from 'apollo-server-express';
 import { constraintDirective } from 'graphql-constraint-directive';
 import { getTypeDef } from '@/common/utils/apollo';
+import { ApolloServerPluginUsageReportingDisabled } from 'apollo-server-core';
 
 const getSchema = (typeDefs: DocumentNode[]) => {
   const schema = makeExecutableSchema({
@@ -17,5 +18,6 @@ export const validateSchema = (...typeDefs: DocumentNode[]) => {
     new ApolloServer({
       schema,
       mocks: true,
+      plugins: [ApolloServerPluginUsageReportingDisabled()],
     });
 };

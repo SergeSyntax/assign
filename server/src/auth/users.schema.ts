@@ -3,8 +3,8 @@ import { gql } from 'apollo-server-core';
 export const usersSchemas = gql`
   enum Role {
     ADMIN
-    MODERATOR
-    MEMBER
+    REVIEWER
+    USER
   }
 
   input RegistrationInput {
@@ -30,6 +30,6 @@ export const usersSchemas = gql`
   }
 
   type Query {
-    profile: User!
+    currentUser: User!
   }
 `;

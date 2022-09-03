@@ -12,13 +12,15 @@ export interface JWTPayload {
   exp: Date;
 }
 
+const BEARER_PREFIX = 'Bearer';
 export const AUTH_HEADER = 'Authorization';
-export const BEARER_PREFIX = 'Bearer';
 export const DAYS_TILL_EXPIRATION = 20;
+
+export const toBearerToken = (token: string) => `${BEARER_PREFIX} ${token}`;
 
 const verifyJWT = promisify(jwt.verify) as any;
 
-export const sign = ({ id, role }: Pick<User, 'id' | 'role'>) =>
+export const sign = ({ id, role }: User) =>
   jwt.sign({ sub: id, aud: role, iat: Date.now() }, SECRET, {
     expiresIn: DAYS_TILL_EXPIRATION + 'd',
   });

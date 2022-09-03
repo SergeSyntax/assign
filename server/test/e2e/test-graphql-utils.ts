@@ -6,6 +6,7 @@ interface GraphqlArguments {
   query: ASTNode;
   variables?: Object;
   operationName?: string;
+  headers?: Record<string, string>;
 }
 
 interface ApolloErrorResponse extends request.Response {
@@ -30,7 +31,9 @@ export const getApolloResponseErrorCode = (res: ApolloErrorResponse) => {
   return getApolloResponseError(res)?.extensions?.code;
 };
 
-export const getApolloResponseData = <T>(res: ApolloResponse): Record<any, T> => {
+export const getApolloResponseData = <T extends Record<string, unknown>>(
+  res: ApolloResponse,
+): Record<any, T> => {
   return res?.body?.data as Record<any, T>;
 };
 
@@ -40,7 +43,8 @@ export const getApolloResponseData = <T>(res: ApolloResponse): Record<any, T> =>
  * @param param
  * @returns
  */
-export const graphqlRequest = async ({ query, ...rest }: GraphqlArguments) =>
+export const graphqlRequest = async ({ query, headers = {}, ...rest }: GraphqlArguments) =>
   request(context.server)
     .post('/graphql')
+    .set(headers)
     .send({ query: print(query), ...rest });

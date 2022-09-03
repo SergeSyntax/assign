@@ -9,12 +9,22 @@ import {
   graphqlRequest,
 } from '../test-graphql-utils';
 import { registration } from 'src/auth/users.service';
-import { User } from '@/common/types';
 import { registrationInput, loginInput } from 'test/mock/users';
 import { usersRepository } from 'src/auth/users.repository';
-import { hash } from 'src/auth/auth.utils';
+import { hash, sign, toBearerToken } from 'src/auth/auth.utils';
+import { User } from '@/common/types';
 
 const BAD_USER_INPUT = 'BAD_USER_INPUT';
+const UNAUTHENTICATED = 'UNAUTHENTICATED';
+
+const insertUser = async () => {
+  const password = await hash(registrationInput.password);
+  const [user] = await usersRepository.create({
+    email: registrationInput.email,
+    password,
+  });
+  return user;
+};
 
 const getCookie = (res: ApolloResponse) => res.header['set-cookie'][0];
 const getAuthHeader = (res: ApolloResponse) => res.header.authorization;
@@ -113,13 +123,6 @@ describe('auth', () => {
       `;
 
       const getLoginRes = (res: ApolloResponse) => getApolloResponseData<User>(res).login;
-      const insertUser = async () => {
-        const password = await hash(registrationInput.password);
-        return usersRepository.create({
-          email: registrationInput.email,
-          password,
-        });
-      };
 
       it('should return error if password is missing', async () => {
         const res = await graphqlRequest({
@@ -184,6 +187,47 @@ describe('auth', () => {
         expect(getApolloResponseErrors(res)).toBeNil();
         expect(getAuthHeader(res)).toMatch(/^Bearer\s\S+/);
         expect(getCookie(res)).toMatch(/^session=.+/);
+      });
+    });
+  });
+
+  describe('Query', () => {
+    describe('currentUser: User!', () => {
+      const query = gql`
+        query CurrentUser {
+          currentUser {
+            id
+            email
+            name
+          }
+        }
+      `;
+
+      it('should return an Error if user is not authenticated', async () => {
+        const res = await graphqlRequest({
+          query,
+        });
+
+        const { extensions, message } = getApolloResponseError(res);
+        expect(extensions.code).toBe(UNAUTHENTICATED);
+        expect(message).toMatch(/^invalid credentials$/i);
+      });
+
+      it('should return user identifier if authenticated', async () => {
+        const user = await insertUser();
+        const bearerToken = toBearerToken(sign(user));
+        const res = await graphqlRequest({
+          query,
+          headers: {
+            Authorization: bearerToken,
+          },
+        });
+
+        expect(getApolloResponseData(res).currentUser).toEqual(
+          expect.objectContaining({
+            email: registrationInput.email,
+          }),
+        );
       });
     });
   });

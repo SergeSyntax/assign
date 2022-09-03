@@ -1,16 +1,18 @@
+import { Maybe } from '@/common/types';
 import passport from 'passport';
-import { User } from 'src/auth';
-import { sign, verify } from './auth.utils';
+import { sign } from './auth.utils';
 import { getUserFromJWT } from './users.service';
+import { User } from './users.type';
 
-// TODO: fix user global express type
-passport.serializeUser((user, done) => {
-  const token = sign(user as User);
-  done(null, token);
+passport.serializeUser<Maybe<string>>((user, done) => {
+  if (user) {
+    const token = sign(user as User);
+    done(null, token);
+  }
 });
 
-passport.deserializeUser(async (jwt, done) => {
-  const user = await getUserFromJWT(jwt as string);
+passport.deserializeUser<Maybe<string>>(async (jwt, done) => {
+  const user = await getUserFromJWT(jwt);
   done(null, user);
 });
 

@@ -154,7 +154,7 @@
         "description": null,
         "fields": [
           {
-            "name": "profile",
+            "name": "currentUser",
             "description": null,
             "args": [],
             "type": {
@@ -257,13 +257,13 @@
             "deprecationReason": null
           },
           {
-            "name": "MEMBER",
+            "name": "REVIEWER",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "MODERATOR",
+            "name": "USER",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null

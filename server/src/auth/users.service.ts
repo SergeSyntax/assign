@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import { UserInputError } from 'apollo-server-core';
-import { RegistrationInput, LoginInput, ResolversTypes } from '@/common/types';
+import { RegistrationInput, LoginInput, ResolversTypes, Maybe } from '@/common/types';
 import { hash, sign, compare, JWTPayload, verify } from './auth.utils';
 import { usersRepository } from './users.repository';
 import { User } from './users.type';
 import { Logger } from '@/common/utils';
+import { Request } from 'express';
 
 interface RegisterResolve {
   token: string;
@@ -20,7 +21,7 @@ export const registration = async ({
   if (isUserExists) throw new UserInputError('the email address already in use');
 
   const hashedPassword = await hash(password);
-  const [user]: User[] = await usersRepository.create({ email, name, password: hashedPassword });
+  const [user] = await usersRepository.create({ email, name, password: hashedPassword });
 
   return {
     user: _.pick(user, ['id', 'name', 'email']),
@@ -42,8 +43,9 @@ export const login = async ({ email, password }: LoginInput): Promise<RegisterRe
   };
 };
 
-export const getUserFromJWT = async (jwt: string): Promise<User | undefined> => {
+export const getUserFromJWT = async (jwt?: string): Promise<Maybe<User>> => {
   try {
+    if (!jwt) return;
     const decoded = await verify(jwt);
     const user: User = await usersRepository.findOne({ id: decoded.sub });
 
@@ -53,5 +55,20 @@ export const getUserFromJWT = async (jwt: string): Promise<User | undefined> => 
     return user;
   } catch (error) {
     Logger.debug(error);
+  }
+};
+
+const isBearerAuth = (token: string) => /^Bearer\s/.test(token);
+
+export const handleAuthHeader = async (req: Request) => {
+  // was authenticated via passport / cookie and not relevant
+  if (req.user) return;
+
+  // req.user
+  const authHeader = req.header('Authorization') ?? '';
+  // authenticate via header
+  if (isBearerAuth(authHeader)) {
+    const [, token] = authHeader.split(' ');
+    req.user = await getUserFromJWT(token);
   }
 };

@@ -38,7 +38,7 @@ export type MutationRegistrationArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  profile: User;
+  currentUser: User;
   test?: Maybe<Scalars['String']>;
 };
 
@@ -50,8 +50,8 @@ export type RegistrationInput = {
 
 export enum Role {
   Admin = 'ADMIN',
-  Member = 'MEMBER',
-  Moderator = 'MODERATOR'
+  Reviewer = 'REVIEWER',
+  User = 'USER'
 }
 
 export type User = {
@@ -160,7 +160,7 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
 }>;
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  profile?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  currentUser?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   test?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 }>;
 

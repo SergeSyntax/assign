@@ -1,4 +1,4 @@
-import { Application } from 'express';
+import { Application, Request } from 'express';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { ApolloServer, ExpressContext } from 'apollo-server-express';
 import {
@@ -10,6 +10,7 @@ import { getPlugins } from './plugins';
 import { getSchema } from './schema';
 import { corsOptions } from '@/common/config/constants';
 import { Env, isEnv } from '@/common/config';
+import { getUserFromJWT, handleAuthHeader } from 'src/auth/users.service';
 
 export const formatError = (err: GraphQLError): GraphQLFormattedError => {
   // Don't give the specific errors to the client.
@@ -25,11 +26,18 @@ export const formatError = (err: GraphQLError): GraphQLFormattedError => {
   return err;
 };
 
-export const context: ContextFunction<ExpressContext, object> = ({ res, req }) => ({
-  user: req.user,
-  res,
-  req,
-});
+/**
+ * @link https://www.apollographql.com/docs/apollo-server/security/authentication/#putting-authenticated-user-info-on-the-context
+ * @link https://www.apollographql.com/docs/apollo-server/api/apollo-server/#middleware-specific-context-fields
+ */
+export const context: ContextFunction<ExpressContext, object> = async ({ res, req }) => {
+  await handleAuthHeader(req);
+  return {
+    user: req.user,
+    res,
+    req,
+  };
+};
 
 export class Apollo {
   apolloServer: ApolloServer<ExpressContext>;
@@ -47,6 +55,10 @@ export class Apollo {
       plugins: getPlugins(this.httpServer),
       context,
       formatError,
+      // https://www.apollographql.com/docs/apollo-server/api/apollo-server/#csrfprevention
+      csrfPrevention: true,
+      // https://www.apollographql.com/docs/apollo-server/performance/cache-backends
+      cache: 'bounded',
     });
   }
 

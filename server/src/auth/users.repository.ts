@@ -14,7 +14,7 @@ class UsersRepository extends Repository<User, RegistrationInput> {
 
   create(data: RegistrationInput) {
     this.createValidation?.validate(data);
-    return this.getBuilder().insert(data, this.returnedColum);
+    return this.getBuilder().insert<string, User[]>(data, this.returnedColum);
   }
 
   isEmailRegistered(email: string) {
