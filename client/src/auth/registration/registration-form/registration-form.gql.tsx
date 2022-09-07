@@ -9,7 +9,7 @@ export type RegistrationMutationVariables = Types.Exact<{
 }>;
 
 
-export type RegistrationMutation = { __typename?: 'Mutation', registration: { __typename?: 'User', id: string, name: string, email: string } };
+export type RegistrationMutation = { __typename?: 'Mutation', registration: { __typename?: 'User', id: string, name: string, email: string, image?: string | undefined } };
 
 
 export const RegistrationDocument = gql`

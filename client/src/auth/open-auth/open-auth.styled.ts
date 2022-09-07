@@ -1,70 +1,25 @@
-import React from 'react';
-import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { Button, styled, css } from '@mui/material';
+import { styled } from '@mui/material';
+import { SubmitButton } from 'src/common/button/button';
 
-export const ContainedButton = styled(Button)`
-  ${({ theme }) => css`
-    position: relative;
+export const OpenAuthGoogleButton = styled(SubmitButton)`
+  &,
+  &:hover,
+  &.loading {
+    color: #29303b;
+    background: #fff !important;
+    margin-bottom: 2.5rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-height: 4.5rem;
-    min-width: 9rem;
-    margin: 1rem 0;
-    padding: 0;
-
-    text-transform: capitalize;
-    font-size: 1.6rem;
-    font-weight: 600;
-
-    transition: all 0.2s;
-    background: #0073b1;
-    color: #fff;
-
-    &:hover {
-      box-shadow: ${theme.shadows[5]};
-      background: #0073b1;
+    svg {
+      color: #29303b;
     }
-
-    &:disabled {
-      background: #0073b1;
-    }
-  `}
-`;
-
-ContainedButton.defaultProps = {
-  variant: 'contained',
-  color: 'primary',
-};
-
-export const OpenAuthGoogleButton = styled(ContainedButton)`
-  color: #29303b;
-  background: #fff;
-  margin-bottom: 2.5rem;
-  &:hover {
-    background: #fff;
   }
 `;
 
-OpenAuthGoogleButton.defaultProps = {
-  fullWidth: true,
-  variant: 'contained',
-  type: 'button',
-  startIcon: React.createElement(FaGoogle),
-};
-
-export const OpenAuthGithubButton = styled(ContainedButton)`
-  background: #29303b;
-  margin-bottom: 2rem;
-  &:hover {
+export const OpenAuthGithubButton = styled(SubmitButton)`
+  &,
+  &:hover,
+  &.loading {
     background: #29303b;
+    margin-bottom: 2rem;
   }
 `;
-
-OpenAuthGithubButton.defaultProps = {
-  fullWidth: true,
-  type: 'button',
-  startIcon: React.createElement(FaGithub),
-};

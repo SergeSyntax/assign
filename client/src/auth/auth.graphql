@@ -2,12 +2,11 @@ fragment UserIdentifiers on User {
   id
   name
   email
+  image
 }
 
 query CurrentUser {
   currentUser {
-    id
-    email
-    name
+    ...UserIdentifiers
   }
 }

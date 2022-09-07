@@ -9,7 +9,7 @@ export type LoginMutationVariables = Types.Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, name: string, email: string } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, name: string, email: string, image?: string | undefined } };
 
 
 export const LoginDocument = gql`

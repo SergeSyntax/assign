@@ -3,29 +3,28 @@ import * as Types from '../common/apollo/types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type UserIdentifiersFragment = { __typename?: 'User', id: string, name: string, email: string };
+export type UserIdentifiersFragment = { __typename?: 'User', id: string, name: string, email: string, image?: string | undefined };
 
 export type CurrentUserQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, email: string, name: string } };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, email: string, image?: string | undefined } };
 
 export const UserIdentifiersFragmentDoc = gql`
     fragment UserIdentifiers on User {
   id
   name
   email
+  image
 }
     `;
 export const CurrentUserDocument = gql`
     query CurrentUser {
   currentUser {
-    id
-    email
-    name
+    ...UserIdentifiers
   }
 }
-    `;
+    ${UserIdentifiersFragmentDoc}`;
 
 /**
  * __useCurrentUserQuery__
