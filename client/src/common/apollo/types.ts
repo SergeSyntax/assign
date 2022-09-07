@@ -40,6 +40,8 @@ export type MutationRegistrationArgs = {
 export type Query = {
   __typename?: 'Query';
   currentUser: User;
+  isGithubProviderConnected: Scalars['Boolean'];
+  isGoogleProviderConnected: Scalars['Boolean'];
 };
 
 export type RegistrationInput = {
@@ -58,6 +60,7 @@ export type User = {
   __typename?: 'User';
   email: Scalars['String'];
   id: Scalars['ID'];
+  image?: Maybe<Scalars['String']>;
   name: Scalars['String'];
 };
 
@@ -66,14 +69,17 @@ export type MutationFieldPolicy = {
 	login?: FieldPolicy<any> | FieldReadFunction<any>,
 	registration?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('currentUser' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('currentUser' | 'isGithubProviderConnected' | 'isGoogleProviderConnected' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
-	currentUser?: FieldPolicy<any> | FieldReadFunction<any>
+	currentUser?: FieldPolicy<any> | FieldReadFunction<any>,
+	isGithubProviderConnected?: FieldPolicy<any> | FieldReadFunction<any>,
+	isGoogleProviderConnected?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type UserKeySpecifier = ('email' | 'id' | 'name' | UserKeySpecifier)[];
+export type UserKeySpecifier = ('email' | 'id' | 'image' | 'name' | UserKeySpecifier)[];
 export type UserFieldPolicy = {
 	email?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	image?: FieldPolicy<any> | FieldReadFunction<any>,
 	name?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type StrictTypedTypePolicies = {
