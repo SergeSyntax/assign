@@ -16,7 +16,7 @@ describe('class usersRepository', () => {
       const query = usersRepository.create(registrationInput).toQuery();
 
       expect(query).toMatchInlineSnapshot(
-        `"insert into \\"users\\" as \\"u\\" (\\"email\\", \\"name\\", \\"password\\") values ('test@test.com', 'test', 'test') returning \\"id\\", \\"name\\", \\"email\\", \\"createdAt\\", \\"updatedAt\\""`,
+        `"insert into \\"users\\" as \\"u\\" (\\"email\\", \\"name\\", \\"password\\") values ('test@test.com', 'test', 'test') returning \\"id\\", \\"name\\", \\"email\\", \\"image\\", \\"createdAt\\", \\"updatedAt\\""`,
       );
     });
 

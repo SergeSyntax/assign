@@ -1,6 +1,6 @@
 import winston from 'winston';
-import { TransformableInfo } from 'logform';
 import { AbstractConfigSetColors } from 'winston/lib/winston/config';
+import { TransformableInfo } from 'logform';
 import { Env, isEnv } from '../config';
 
 const enum LevelType {

@@ -39,6 +39,8 @@ export type MutationRegistrationArgs = {
 export type Query = {
   __typename?: 'Query';
   currentUser: User;
+  isGithubProviderConnected: Scalars['Boolean'];
+  isGoogleProviderConnected: Scalars['Boolean'];
   test?: Maybe<Scalars['String']>;
 };
 
@@ -58,6 +60,7 @@ export type User = {
   __typename?: 'User';
   email: Scalars['String'];
   id: Scalars['ID'];
+  image?: Maybe<Scalars['String']>;
   name: Scalars['String'];
 };
 
@@ -161,12 +164,15 @@ export type MutationResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   currentUser?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  isGithubProviderConnected?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  isGoogleProviderConnected?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   test?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 }>;
 
 export type UserResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

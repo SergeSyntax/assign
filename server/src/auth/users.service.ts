@@ -3,14 +3,18 @@ import { UserInputError } from 'apollo-server-core';
 import { RegistrationInput, LoginInput, ResolversTypes, Maybe } from '@/common/types';
 import { hash, sign, compare, JWTPayload, verify } from './auth.utils';
 import { usersRepository } from './users.repository';
-import { User } from './users.type';
+import { OauthPayload, User } from './users.type';
 import { Logger } from '@/common/utils';
 import { Request } from 'express';
+import { VerifyCallback } from 'passport-google-oauth20';
+import ServerError from '@/common/utils/server-error';
 
 interface RegisterResolve {
   token: string;
   user: ResolversTypes['User'];
 }
+
+export const formatUserType = (user: User) => _.pick(user, ['id', 'name', 'email', 'image']);
 
 export const registration = async ({
   email,
@@ -24,7 +28,7 @@ export const registration = async ({
   const [user] = await usersRepository.create({ email, name, password: hashedPassword });
 
   return {
-    user: _.pick(user, ['id', 'name', 'email']),
+    user: formatUserType(user),
     token: sign(user),
   };
 };
@@ -38,7 +42,7 @@ export const login = async ({ email, password }: LoginInput): Promise<RegisterRe
   if (!isPasswordValid) throw new UserInputError('invalid credentials');
 
   return {
-    user: _.pick(user, ['id', 'name', 'email']),
+    user: formatUserType(user),
     token: sign(user),
   };
 };
@@ -70,5 +74,20 @@ export const handleAuthHeader = async (req: Request) => {
   if (isBearerAuth(authHeader)) {
     const [, token] = authHeader.split(' ');
     req.user = await getUserFromJWT(token);
+  }
+};
+
+export const handleOauth = async (payload: OauthPayload, done: VerifyCallback) => {
+  try {
+    const existingUser = await usersRepository.findOne({ email: payload.email });
+    if (existingUser) return done(null, existingUser);
+
+    const [user] = await usersRepository.create(payload);
+
+    if (!user) return done(new ServerError('Internal server error', 500));
+    return done(null, user);
+  } catch (err) {
+    Logger.error('handleOauth failure', err);
+    done(new ServerError('Internal server error', 500));
   }
 };

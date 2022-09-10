@@ -4,6 +4,7 @@ import { ApolloContext } from '@/common/types';
 import { Resolvers } from '@/common/types/generated/graphql';
 import { AUTH_HEADER, toBearerToken } from './auth.utils';
 import * as usersService from './users.service';
+import { isGithubProviderConnected, isGoogleProviderConnected } from './passport.const';
 
 const setAuthToken = (context: ApolloContext, token: string) => {
   context.req.session = { passport: { user: token } };
@@ -26,7 +27,9 @@ export const usersResolvers: Resolvers = {
   Query: {
     currentUser: (_parent, _args, { user }, _info) => {
       if (!user) throw new AuthenticationError('invalid credentials');
-      return _.pick(user, ['id', 'name', 'email']);
+      return usersService.formatUserType(user);
     },
+    isGoogleProviderConnected: () => isGoogleProviderConnected,
+    isGithubProviderConnected: () => isGithubProviderConnected,
   },
 };

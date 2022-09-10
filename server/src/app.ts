@@ -8,6 +8,7 @@ import { isEnv, PORT, cookieSessionOptions, corsOptions, Env } from './common/co
 import { Logger } from '@/common/utils';
 import { Apollo } from './common/utils/apollo';
 import { passport } from './auth';
+import { authRoute } from './auth/passport.route';
 
 export class App {
   public app: Express;
@@ -26,15 +27,23 @@ export class App {
   }
 
   applyMiddleware() {
+    // traffic proxy through nginx-ingress
+    // express don't trust to ssl on proxy by default
+    this.app.set('trust proxy', true);
     this.app.use(json({ limit: '50kb' }));
-    this.app.use(cors(corsOptions));
     this.app.use(cookieSession(cookieSessionOptions));
+    this.app.use(cors(corsOptions));
     this.app.use(passport.initialize());
     this.app.use(passport.session());
   }
 
+  applyRoutes() {
+    this.app.use('/auth', authRoute);
+  }
+
   async init() {
     this.applyMiddleware();
+    this.applyRoutes();
     if (isEnv(Env.Production)) this.applyProductionMiddleware();
     await this.apollo.start();
     return this.httpServer;

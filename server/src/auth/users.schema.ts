@@ -22,6 +22,7 @@ export const usersSchemas = gql`
     id: ID!
     name: String!
     email: String!
+    image: String
   }
 
   type Mutation {
@@ -31,5 +32,7 @@ export const usersSchemas = gql`
 
   type Query {
     currentUser: User!
+    isGoogleProviderConnected: Boolean!
+    isGithubProviderConnected: Boolean!
   }
 `;

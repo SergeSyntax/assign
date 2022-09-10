@@ -1,8 +1,10 @@
 import userEvent from '@testing-library/user-event';
 import { render, screen, waitForElementToBeRemoved, within } from 'test-utils';
 import mockRouter from 'next-router-mock';
-import { INVALID_MOCK_EMAIL, MOCK_EMAIL, MOCK_NAME, MOCK_PASSWORD } from 'test/mocks/handlers/auth';
 import { RegistrationForm } from './registration-form';
+import { setupRequestHandlerMutation } from 'test/mocks/server';
+import { RegistrationMutation } from './registration-form.gql';
+import { USER, MOCK_EMAIL, MOCK_NAME, MOCK_PASSWORD } from 'src/auth/__test__/auth';
 
 describe('<RegistrationForm />', () => {
   it('should render a registration form', () => {
@@ -35,7 +37,7 @@ describe('<RegistrationForm />', () => {
     await user.type(nameInput, MOCK_NAME);
 
     const emailInput = screen.getByRole('textbox', { name: /email/i });
-    await user.type(emailInput, INVALID_MOCK_EMAIL);
+    await user.type(emailInput, MOCK_EMAIL);
 
     const passwordInput = screen.getByLabelText(/password$/i, { selector: 'input' });
     await user.type(passwordInput, MOCK_PASSWORD);
@@ -48,6 +50,14 @@ describe('<RegistrationForm />', () => {
   });
 
   it('should display email error message on used emails', async () => {
+    setupRequestHandlerMutation<RegistrationMutation>('Registration', {
+      errors: [
+        {
+          message: 'the email address already in use',
+          path: ['registration'],
+        },
+      ],
+    });
     const user = userEvent.setup();
 
     render(<RegistrationForm />);
@@ -56,7 +66,7 @@ describe('<RegistrationForm />', () => {
     await user.type(nameInput, MOCK_NAME);
 
     const emailInput = screen.getByRole('textbox', { name: /email/i });
-    await user.type(emailInput, INVALID_MOCK_EMAIL);
+    await user.type(emailInput, MOCK_EMAIL);
 
     const passwordInput = screen.getByLabelText(/password$/i, { selector: 'input' });
     await user.type(passwordInput, MOCK_PASSWORD);
@@ -81,6 +91,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('should redirect on success', async () => {
+    setupRequestHandlerMutation<RegistrationMutation>('Registration', { data: { registration: USER } });
     const user = userEvent.setup();
 
     render(<RegistrationForm />);

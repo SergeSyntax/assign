@@ -25,7 +25,7 @@ describe('auth.utils', () => {
 
   describe('jwt.sign(), jwt.decode()', () => {
     it('should sign and decode the jwt', async () => {
-      const jwt = sign(USER);
+      const jwt = sign(USER as any);
       const user = await verify(jwt);
       const dateNow = new Date();
       const expDate = dateNow.setDate(dateNow.getDate() + DAYS_TILL_EXPIRATION);

@@ -1,4 +1,3 @@
-import { Knex } from 'knex';
 import { pool } from './pool';
 import { Validation } from './validation';
 
