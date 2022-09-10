@@ -5,8 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import { isEnv, PORT, cookieSessionOptions, corsOptions, Env } from './common/config';
-import { Logger } from '@/common/utils';
-import { Apollo } from './common/utils/apollo';
+import { Logger, Apollo } from '@/common/utils';
 import { passport } from './auth';
 import { authRoute } from './auth/passport.route';
 
@@ -43,8 +42,8 @@ export class App {
 
   async init() {
     this.applyMiddleware();
-    this.applyRoutes();
     if (isEnv(Env.Production)) this.applyProductionMiddleware();
+    this.applyRoutes();
     await this.apollo.start();
     return this.httpServer;
   }

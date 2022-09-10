@@ -1,6 +1,6 @@
 import { app } from './app';
-import { Logger, pool } from '@/common/utils';
 import { knexConfig } from '@/common/config';
+import { Logger, pool } from '@/common/utils';
 
 const handleProcessError = (err: unknown) => {
   Logger.error(err);
