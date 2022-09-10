@@ -1,4 +1,3 @@
-import { useApolloClient } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useCurrentUserQuery, UserIdentifiersFragment, UserIdentifiersFragmentDoc } from './auth.gql';
 
