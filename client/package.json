@@ -12,8 +12,8 @@
     "test:watch": "jest --watch",
     "format": "prettier --config .prettierrc.json --write src/**/*.ts --ignore-path .gitignore",
     "test:ci": "jest --ci",
-    "generate": "graphql-codegen  --config ./config/codegen.ts",
-    "generate:watch": "graphql-codegen --watch"
+    "generate": "graphql-codegen --config ./config/codegen.ts",
+    "generate:watch": "graphql-codegen --config ./config/codegen.ts --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
