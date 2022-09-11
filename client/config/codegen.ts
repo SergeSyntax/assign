@@ -13,7 +13,7 @@ const config: CodegenConfig = {
   verbose: true,
   generates: {
     'src/common/apollo/types.ts': {
-      plugins: ['typescript', 'typescript-apollo-client-helpers'],
+      plugins: ['typescript', 'typescript-apollo-client-helpers', 'fragment-matcher'],
       hooks: {
         afterAllFileWrite: ['eslint --fix', 'prettier --fix'],
       },

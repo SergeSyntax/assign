@@ -2,7 +2,7 @@ import { IncomingHttpHeaders } from 'http';
 import { ApolloLink, from, createHttpLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
-import { BASE_URL, BASE_URL_APOLLO } from 'config/api';
+import { BASE_URL_APOLLO } from 'config/api';
 import fetch from 'cross-fetch';
 
 export interface CreateApolloHttpLink {

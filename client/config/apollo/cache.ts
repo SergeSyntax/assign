@@ -1,5 +1,6 @@
 import { InMemoryCache, makeVar } from '@apollo/client';
 import { offsetLimitPagination } from '@apollo/client/utilities';
+import result from 'src/common/apollo/types';
 
 export const searchVar = makeVar('');
 
@@ -9,6 +10,7 @@ const { merge: offsetLimitPaginationMerge } = offsetLimitPagination();
  * @link https://www.apollographql.com/docs/react/caching/cache-configuration
  */
 export const cache = new InMemoryCache({
+  possibleTypes: result.possibleTypes,
   typePolicies: {
     Query: {
       fields: {
