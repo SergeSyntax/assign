@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import { useUserData } from 'src/auth/auth.hook';
 import { useDropdown } from './dropdown.hook';
-import { formatUserInfo } from './format-user-info.util';
+import { formatUserInfo } from './user-options.util';
 import { UserAvatar, UserOptionsMenu, UserOptionsMenuButton } from './user-options.styled';
 
 export const UserOptions: React.FC = () => {
@@ -27,11 +27,8 @@ export const UserOptions: React.FC = () => {
           horizontal: 'center',
         }}
       >
-        <MenuItem
-          onClick={() => {
-            location.replace('/api/logout');
-          }}
-        >
+        {/* https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout */}
+        <MenuItem onClick={() => location.replace('/api/logout')}>
           <ListItemIcon>
             <FiLogOut />
           </ListItemIcon>

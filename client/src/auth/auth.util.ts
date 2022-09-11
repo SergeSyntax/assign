@@ -2,8 +2,8 @@ import { addApolloState, initializeApollo } from 'config';
 import { GetServerSideProps } from 'next';
 import { CurrentUserDocument } from './auth.gql';
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const apolloClient = initializeApollo({ headers: req.headers });
+export const getServerSideProps: GetServerSideProps = async ({ req: { headers } }) => {
+  const apolloClient = initializeApollo({ headers });
   try {
     await apolloClient.query({
       query: CurrentUserDocument,

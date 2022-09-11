@@ -14,7 +14,7 @@ import {
 } from './dashboard-header.styled';
 import { DashboardCreate } from '../dashboard-create';
 import { DashboardSearch } from '../dashboard-search';
-import { UserOptions } from '../user-options';
+import { UserOptions } from '../../auth/user-options';
 import { useGetCurrentTabValue } from './dashboard-header.hook';
 
 // import { UserOptions } from '../common/user-options';

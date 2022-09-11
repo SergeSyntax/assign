@@ -1,15 +1,13 @@
 import { IncomingHttpHeaders } from 'http';
-import { HttpLink, ApolloLink, from } from '@apollo/client';
+import { ApolloLink, from, createHttpLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
-import { BASE_URL } from 'config/api';
+import { BASE_URL, BASE_URL_APOLLO } from 'config/api';
 import fetch from 'cross-fetch';
 
 export interface CreateApolloHttpLink {
   headers?: IncomingHttpHeaders;
 }
-
-export const BASE_URL_APOLLO = `${BASE_URL}/graphql`;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -39,7 +37,8 @@ const retryLink = new RetryLink({
 });
 
 export const generateLinks = ({ headers = {} }: CreateApolloHttpLink) => {
-  const httpLink = new HttpLink({
+  // https://www.apollographql.com/docs/react/networking/authentication/#header
+  const httpLink = createHttpLink({
     uri: BASE_URL_APOLLO, // Server URL (must be absolute)
     credentials: 'include', // Additional fetch() options like `credentials` or `headers`
     fetch,

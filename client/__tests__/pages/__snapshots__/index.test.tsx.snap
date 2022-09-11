@@ -51,7 +51,7 @@ exports[`renders homepage unchanged 1`] = `
       class="css-1fp3c9n"
     >
       <a
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedInherit MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorInherit css-1aub1mo-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedInherit MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorInherit css-r8e6p9-MuiButtonBase-root-MuiButton-root"
         href="/auth/registration"
         tabindex="0"
       >
@@ -61,7 +61,7 @@ exports[`renders homepage unchanged 1`] = `
         />
       </a>
       <a
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedInherit MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorInherit css-1g6yw9l-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedInherit MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorInherit css-1510js8-MuiButtonBase-root-MuiButton-root"
         href="/auth/login"
         tabindex="0"
       >
@@ -73,7 +73,7 @@ exports[`renders homepage unchanged 1`] = `
     </div>
     <button
       aria-label="Scroll down button"
-      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1al2hqg-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-78uewt-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -395,7 +395,7 @@ exports[`renders homepage unchanged 1`] = `
     </p>
   </div>
   <button
-    class="MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-default css-17xztg-MuiButtonBase-root-MuiFab-root"
+    class="MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-default css-dnil5c-MuiButtonBase-root-MuiFab-root"
     style="transform: scale(0); visibility: hidden;"
     tabindex="0"
     type="button"
