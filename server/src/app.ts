@@ -6,8 +6,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import { isEnv, PORT, cookieSessionOptions, corsOptions, Env } from './common/config';
 import { Logger, Apollo } from '@/common/utils';
-import { passport } from './auth';
-import { authRoute } from './auth/passport.route';
+import { passport, authRoute } from './auth';
 
 export class App {
   public app: Express;

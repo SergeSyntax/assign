@@ -4,8 +4,9 @@ import { RiMailSendLine } from 'react-icons/ri';
 import { CreateButton } from './create-button';
 import { MenuCreate } from './project-create/menu-create.style';
 import { MenuItem } from '@mui/material';
-import { useDropdown } from '../../common/dropdown.hook';
 import { ProjectCreate } from './project-create';
+import { useDropdown } from 'src/common/dropdown.hook';
+import { BiLayerPlus } from 'react-icons/bi';
 
 export const DashboardCreate: React.FC = () => {
   const { dropdown, openDropdown, closeDropdown } = useDropdown();
@@ -25,7 +26,9 @@ export const DashboardCreate: React.FC = () => {
           horizontal: 'center',
         }}
       >
-        <ProjectCreate closeDropdown={closeDropdown} />
+        <MenuItem>
+          <BiLayerPlus /> New Project
+        </MenuItem>
         <MenuItem>
           <AiOutlineUsergroupAdd />
           New Team

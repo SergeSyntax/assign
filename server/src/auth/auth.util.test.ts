@@ -1,6 +1,6 @@
 import { Role } from '@/common/types';
 import { faker } from '@faker-js/faker';
-import { compare, DAYS_TILL_EXPIRATION, verify, hash, sign } from './auth.utils';
+import { compare, DAYS_TILL_EXPIRATION, verify, hash, sign } from './auth.util';
 
 const PASSWORD = 'test';
 const SAME_PASSWORD = 'test';

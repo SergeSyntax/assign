@@ -28,7 +28,7 @@ interface DashboardNavTabProps {
 const DASHBOARD_NAV_TABS = Object.freeze<DashboardNavTabProps[]>([
   { href: '/dashboard', label: 'Home', icon: MdHome },
   { href: '/dashboard/teams', label: 'Teams', icon: MdPeople },
-  { href: '/dashboard/projects', label: 'Projects', icon: MdLayers },
+  { href: '/dashboard/boards', label: 'boards', icon: MdLayers },
   { href: '/dashboard/documents', label: 'Documents', icon: MdListAlt },
 ]);
 
@@ -55,7 +55,7 @@ export const DashboardHeader: React.FC = () => {
             {DASHBOARD_NAV_TABS.map(renderDashboardNavTab)}
           </Tabs>
           <Grid container direction="row" justifyContent="flex-end" wrap="nowrap">
-            {/* <DashboardCreate /> */}
+            <DashboardCreate />
             <UserOptions />
           </Grid>
         </DashboardToolbar>

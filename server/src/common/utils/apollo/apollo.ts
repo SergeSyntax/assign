@@ -10,7 +10,7 @@ import { getPlugins } from './plugins';
 import { getSchema } from './schema';
 import { corsOptions } from '@/common/config/constants';
 import { Env, isEnv } from '@/common/config';
-import { getUserFromJWT, handleAuthHeader } from 'src/auth/users.service';
+import { handleAuthHeader } from 'src/auth/users.service';
 
 export const formatError = (err: GraphQLError): GraphQLFormattedError => {
   // Don't give the specific errors to the client.
@@ -58,7 +58,7 @@ export class Apollo {
       // https://www.apollographql.com/docs/apollo-server/api/apollo-server/#csrfprevention
       csrfPrevention: true,
       // https://www.apollographql.com/docs/apollo-server/performance/cache-backends
-      cache: 'bounded',
+      // cache: 'bounded',
     });
   }
 

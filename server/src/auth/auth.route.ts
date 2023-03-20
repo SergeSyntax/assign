@@ -1,4 +1,4 @@
-import passport from './passport.service';
+import passport from './auth.service';
 import { Router } from 'express';
 import { CLIENT_URL } from '@/common/config';
 import { AuthenticateOptions } from 'passport';

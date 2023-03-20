@@ -2,9 +2,8 @@ import _ from 'lodash';
 import passport, { Profile } from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as GitHubStrategy } from 'passport-github2';
-
 import { Maybe } from '@/common/types';
-import { sign } from './auth.utils';
+import { sign } from './auth.util';
 import { getUserFromJWT, handleOauth } from './users.service';
 import { GithubVerificationHandler, GoogleVerificationHandler, User } from './users.type';
 import {
@@ -12,7 +11,7 @@ import {
   googleStrategyOptions,
   isGithubProviderConnected,
   isGoogleProviderConnected,
-} from './passport.const';
+} from './auth.const';
 
 passport.serializeUser<Maybe<string>>((user, done) => {
   if (user) {

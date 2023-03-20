@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { UserInputError } from 'apollo-server-core';
 import { RegistrationInput, LoginInput, ResolversTypes, Maybe } from '@/common/types';
-import { hash, sign, compare, JWTPayload, verify } from './auth.utils';
+import { hash, sign, compare, JWTPayload, verify } from './auth.util';
 import { usersRepository } from './users.repository';
 import { OauthPayload, User } from './users.type';
 import { Logger } from '@/common/utils';
@@ -62,8 +62,6 @@ export const getUserFromJWT = async (jwt?: string): Promise<Maybe<User>> => {
   }
 };
 
-const isBearerAuth = (token: string) => /^Bearer\s/.test(token);
-
 export const handleAuthHeader = async (req: Request) => {
   // was authenticated via passport / cookie and not relevant
   if (req.user) return;
@@ -71,7 +69,7 @@ export const handleAuthHeader = async (req: Request) => {
   // req.user
   const authHeader = req.header('Authorization') ?? '';
   // authenticate via header
-  if (isBearerAuth(authHeader)) {
+  if (/^Bearer\s/.test(authHeader)) {
     const [, token] = authHeader.split(' ');
     req.user = await getUserFromJWT(token);
   }

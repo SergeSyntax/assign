@@ -1,7 +1,7 @@
 import { UserInputError } from 'apollo-server-core';
 import _ from 'lodash';
 import { registrationInput, loginInput } from 'test/mock/users';
-import { compare, hash, sign } from './auth.utils';
+import { compare, hash, sign } from './auth.util';
 import { usersRepository } from './users.repository';
 import * as usersService from './users.service';
 

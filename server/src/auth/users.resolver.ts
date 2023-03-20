@@ -2,9 +2,9 @@ import _ from 'lodash';
 import { AuthenticationError } from 'apollo-server-core';
 import { ApolloContext } from '@/common/types';
 import { Resolvers } from '@/common/types/generated/graphql';
-import { AUTH_HEADER, toBearerToken } from './auth.utils';
+import { AUTH_HEADER, toBearerToken } from './auth.util';
 import * as usersService from './users.service';
-import { isGithubProviderConnected, isGoogleProviderConnected } from './passport.const';
+import { isGithubProviderConnected, isGoogleProviderConnected } from './auth.const';
 
 const setAuthToken = (context: ApolloContext, token: string) => {
   context.req.session = { passport: { user: token } };

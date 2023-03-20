@@ -12,9 +12,7 @@ const setSearchVar = _.debounce(searchVar, 500);
 
 export const DashboardSearch: React.FC = () => {
   const searchValue = useReactiveVar(searchVar);
-  console.log('searchValue', searchValue);
   const [value, setValue] = useState(searchValue);
-  console.log('value', value);
 
   const clearSearch = () => {
     setValue(EMPTY);

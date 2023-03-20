@@ -1,17 +1,11 @@
-const INITIAL_DATA = { name: 'unknown', email: 'user@domain.com' };
-
-export const formatUserInfo = (user?: { name: string; email: string }) => {
-  const { name, email } = user ?? INITIAL_DATA;
-
-  if (name && name !== 'unknown') {
-    const secondLetter = /\s[a-z]/i.exec(name);
-    const firstLetter = name;
-    const letter = secondLetter ? `${firstLetter}${secondLetter[0][1]}` : firstLetter;
-    return { name, letter };
-  } else {
-    const [name] = (email ?? INITIAL_DATA.email).split('@');
-    const letter = name[0].toUpperCase();
-
-    return { name, letter };
+export const getUserLetter = (email: string, name?: string) => {
+  if (name) {
+    const [firstName, lastName] = name.trim().split(/\s/i);
+    const firstLatter = firstName.charAt(0);
+    const secondLetter = lastName.charAt(0);
+    const letter = `${firstLatter}${secondLetter}`;
+    return letter.toUpperCase();
   }
+
+  return email.trimStart().charAt(0).toUpperCase();
 };

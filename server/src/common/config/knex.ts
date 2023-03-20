@@ -31,6 +31,7 @@ const DATABASE_CONFIG = Object.freeze<Knex.Config>({
   seeds: {
     extension: 'ts',
     directory: `database/seeds`,
+    timestampFilenamePrefix: true,
   },
   debug: isEnv(Env.Development),
   /**

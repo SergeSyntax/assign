@@ -2,8 +2,8 @@ import { ListItemIcon, MenuItem } from '@mui/material';
 import React, { Fragment } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import { useUserData } from 'src/auth/auth.hook';
-import { useDropdown } from './dropdown.hook';
-import { formatUserInfo } from './user-options.util';
+import { useDropdown } from '../../common/dropdown.hook';
+import { getUserLetter } from './user-options.util';
 import { UserAvatar, UserOptionsMenu, UserOptionsMenuButton } from './user-options.styled';
 
 export const UserOptions: React.FC = () => {
@@ -13,7 +13,9 @@ export const UserOptions: React.FC = () => {
   return (
     <Fragment>
       <UserOptionsMenuButton color="inherit" onClick={openDropdown}>
-        <UserAvatar src={currentUser?.image}>{loading ? '' : formatUserInfo(currentUser).letter}</UserAvatar>
+        <UserAvatar src={currentUser?.image}>
+          {loading ? '' : getUserLetter(currentUser!.email, currentUser?.name)}
+        </UserAvatar>
       </UserOptionsMenuButton>
 
       <UserOptionsMenu

@@ -6,6 +6,18 @@ export const theme = createTheme({
     fontFamily: ['Lato', 'sans-serif'].join(','),
     htmlFontSize: 10,
     fontSize: FONT_SIZE,
+    h1: {
+      fontSize: '3rem',
+      lineHeight: '1.3',
+      letterSpacing: 'letter-spacing',
+      fontWeight: 'bold',
+    },
+    h2: {
+      fontSize: '2rem',
+      lineHeight: '1.2',
+      letterSpacing: 'letter-spacing',
+      fontWeight: 'normal',
+    },
     h4: {
       fontSize: '5rem',
       letterSpacing: '.1rem',

@@ -27,6 +27,10 @@ export interface OauthPayload {
 
 export type CreateUserPayload = RegistrationInput | OauthPayload;
 
+export interface InsertAdmin extends RegistrationInput {
+  role: Role.Admin;
+}
+
 interface GithubCallbackParameters {
   access_token: string;
   scope: string;
